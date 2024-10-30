@@ -13,10 +13,21 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('nama');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable()->default(['Laki-laki', 'Perempuan']);
+            $table->enum('agama', ['Islam', 'Kristen', 'Hindu', 'Buddha', 'Katolik', 'Khonghucu'])->nullable()->default(['Islam', 'Kristen', 'Hindu', 'Buddha', 'Katolik', 'Khonghucu']);
+            $table->date('tanggal_lahir')->nullable();
+            $table->string('tempat_lahir')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('image')->nullable();
+            $table->string('image_url')->nullable();
+            $table->date('tanggal_mulai_kerja')->default(new DateTime());
+            $table->string('jam_kerja')->nullable();
+            $table->enum('role', ['Admin', 'Karyawan']);
             $table->rememberToken();
             $table->timestamps();
         });
