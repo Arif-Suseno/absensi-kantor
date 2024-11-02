@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('kontrak_id')->constrained('kontrak')->onDelete('cascade');
+            $table->foreignId('jabatan_id')->constrained('jabatan')->onDelete('cascade');
             $table->string('nama');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -23,16 +25,11 @@ return new class extends Migration
             $table->string('tempat_lahir',100)->nullable();
             $table->string('no_hp',15)->nullable();
             $table->text('alamat')->nullable();
-            $table->string('url',255)->nullable();
-
-            $table->unsignedBigInteger('jabatan_id')->nullable();
-
-            $table->unsignedBigInteger('kontak_id')->nullable();
-
+            $table->string('image',255)->nullable();
             $table->string('image_url',255)->nullable();
             $table->date('tanggal_mulai_kerja')->nullable();
             $table->string('jam_kerja',50)->nullable();
-            $table->enum('role',['Admin','Supervisor','Karyawan']);
+            $table->enum('role',['Admin','Karyawan']);
             $table->rememberToken();
             $table->timestamps();
         });

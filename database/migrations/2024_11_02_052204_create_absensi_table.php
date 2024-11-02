@@ -12,14 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('absensi', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->date('tanggal')->notNullable();
-            $table->time('waktu_masuk')->notNullable();
-            $table->time('waktu_keluar')->notNullable();
-            $table->enum('status',['Hadir','Sakit','Cuti','Alpa','Izin']);
-            $table->timestamps();
-        });
+        $table->id();
+        $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+        $table->date('tanggal')->notNullable();
+        $table->time('waktu_masuk')->notNullable();
+        $table->time('waktu_keluar')->notNullable();
+        $table->enum('status',['Hadir','Sakit','Cuti','Alpa','Izin']);
+        $table->timestamps();
+    });
+        
     }
 
     /**

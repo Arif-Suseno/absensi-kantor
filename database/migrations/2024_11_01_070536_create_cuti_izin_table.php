@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('cuti_izin', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            // $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->date('tanggal_mulai');
             $table->date('tanggal_selesai');
             $table->enum('jenis',['Cuti','Izin']);
