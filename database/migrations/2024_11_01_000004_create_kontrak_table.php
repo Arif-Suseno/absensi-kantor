@@ -11,14 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('cuti_izin', function (Blueprint $table) {
+        Schema::create('kontrak', function (Blueprint $table) {
             $table->id();
-            // $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->enum('jenis_kontrak',['Permanen','Sementara','Magang']);
+            $table->integer('durasi_kontrak')->nullable();
             $table->date('tanggal_mulai');
-            $table->date('tanggal_selesai');
-            $table->enum('jenis',['Cuti','Izin']);
-            $table->text('alasan')->nullable();
-            $table->enum('status',['Diajukan','Disetujui','Ditolak']);
+            $table->date('tanggal_selesai')->nullable();
+            $table->text('deskripsi')->nullable();
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('cuti_izin');
+        Schema::dropIfExists('kontrak');
     }
 };
