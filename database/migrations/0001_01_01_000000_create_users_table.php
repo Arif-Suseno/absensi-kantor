@@ -13,21 +13,23 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('nama')->change();
+            $table->foreignId('kontrak_id')->constrained('kontrak')->onDelete('cascade');
+            $table->foreignId('jabatan_id')->constrained('jabatan')->onDelete('cascade');
+            $table->string('nama');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('gender', ['Laki-laki', 'Perempuan'])->nullable()->default(['Laki-laki', 'Perempuan']);
-            $table->enum('agama', ['Islam', 'Kristen', 'Hindu', 'Buddha', 'Katolik', 'Khonghucu'])->nullable()->default(['Islam', 'Kristen', 'Hindu', 'Buddha', 'Katolik', 'Khonghucu']);
+            $table->enum('gender',['L','P']);
+            $table->enum('agama',['Islam','Kristen','Hindu','Buddha']);
             $table->date('tanggal_lahir')->nullable();
-            $table->string('tempat_lahir')->nullable();
-            $table->string('no_telp')->nullable();
+            $table->string('tempat_lahir',100)->nullable();
+            $table->string('no_hp',15)->nullable();
             $table->text('alamat')->nullable();
-            $table->string('image')->nullable();
-            $table->string('image_url')->nullable();
-            $table->date('tanggal_mulai_kerja')->default(new DateTime());
-            $table->string('jam_kerja')->nullable();
-            $table->enum('role', ['Admin', 'Karyawan']);
+            $table->string('image',255)->nullable();
+            $table->string('image_url',255)->nullable();
+            $table->date('tanggal_mulai_kerja')->nullable();
+            $table->string('jam_kerja',50)->nullable();
+            $table->enum('role',['Admin','Karyawan']);
             $table->rememberToken();
             $table->timestamps();
         });
