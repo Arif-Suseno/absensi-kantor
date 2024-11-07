@@ -6,8 +6,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dasboard', function () {
-    return view('admin.dasboard');
+Route::get('/dashboard_admin', function () {
+    return view('admin.dashboard_admin', ["title"=> "Dashboard"]);
 });
 
 Route::get('/login', function () {
