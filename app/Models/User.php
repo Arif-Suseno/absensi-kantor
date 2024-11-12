@@ -9,6 +9,17 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+      // Relasi ke model Jabatan (satu User memiliki satu Jabatan)
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class);
+    }
+
+      // Relasi ke model Kontrak (satu User memiliki satu Kontrak)
+    public function kontrak()
+    {
+        return $this->belongsTo(Kontrak::class);
+    }
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
@@ -17,11 +28,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    // ];
 
     /**
      * The attributes that should be hidden for serialization.

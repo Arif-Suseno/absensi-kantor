@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('gender',['L','P']);
-            $table->enum('agama',['Islam','Kristen','Hindu','Buddha']);
+            $table->enum('agama',['Islam','Kristen','Hindu','Buddha','Katolik','Konghucu']);
             $table->date('tanggal_lahir')->nullable();
             $table->string('tempat_lahir',100)->nullable();
             $table->string('no_hp',15)->nullable();
