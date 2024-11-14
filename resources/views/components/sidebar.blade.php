@@ -1,4 +1,4 @@
-    <div class="w-1/5 h-screen bg-gray-300  shadow-md">
+    <div class="w-1/4 h-auto bg-gray-300  shadow-md">
         <div class="p-2 text-center text-lg font-bold border-b flex items-center">
             <img src="{{ Vite::asset('public/images/logo3.png') }}" alt="" class="w-10 h-10 rounded-full">
             <h1>GSI</h1>
