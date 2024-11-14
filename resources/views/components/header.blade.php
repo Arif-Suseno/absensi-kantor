@@ -3,7 +3,7 @@
     <section class="flex">
         {{-- Hamburger menu --}}
         <button type="button" class="flex flex-col m-2 p-1 box-border rounded-md">
-            <span class="w-5 h-1 bg-gray-500 mb-1 "></span>
+            <span class="w-5 h-1 bg-gray-500 mb-1"></span>
             <span class="w-5 h-1 bg-gray-500 mb-1"></span>
             <span class="w-5 h-1 bg-gray-500"></span>
         </button>
