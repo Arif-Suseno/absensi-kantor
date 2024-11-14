@@ -2,64 +2,43 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Absensi;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Absensi;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 
 class AbsensiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    // Tampilkan halaman absensi dengan formulir
     public function index()
     {
-        //
+        return view('karyawan.absensi', ['title' => 'Formulir Absensi']);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Simpan data absensi
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
+        ]);
+
+        Absensi::create([
+            'user_id' => Auth::id(),
+            'tanggal' => Carbon::now()->toDateString(),
+            'waktu_masuk' => Carbon::now()->format('H:i:s'),
+            'waktu_keluar' =>  null,  // atau '00:00:00',
+            'status' => $request->status,
+        ]);
+
+        return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Absensi $absensi)
-    {
-        //
-    }
+    // Tampilkan riwayat absensi karyawan
+    // public function riwayat()
+    // {
+    //     $absensi = Absensi::where('user_id', Auth::id())->orderBy('tanggal', 'desc')->get();
+    //     return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
+    // }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Absensi $absensi)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Absensi $absensi)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Absensi $absensi)
-    {
-        //
-    }
 }
