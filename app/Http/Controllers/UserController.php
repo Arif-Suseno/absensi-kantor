@@ -11,4 +11,13 @@ class UserController extends Controller
         $users = User::all();
         return view('admin.data_karyawan', ['title' => 'Data Karyawan','users' => $users]);
     }
+
+    public function index()
+    {
+        $user = User::first();
+        return view('karyawan.profile', [
+            'title' => 'Profil Karyawan',
+            'user' => $user,
+        ]);
+    }
 }

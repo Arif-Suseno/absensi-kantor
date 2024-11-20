@@ -20,6 +20,6 @@
                 class="fa-solid fa-clock-rotate-left px-2"></i>Riwayat</x-navlink>
         <x-navlink href="/pengajuan_izin&cuti" :active="request()->is('pengajuan_izin&cuti')"><i class="fa-solid fa-envelope px-2"></i>Pengajuan
             Izin & Cuti</x-navlink>
-        <x-navlink href="/profile_admin" :active="request()->is('pengajuan_izin&cuti')"><i class="fa-solid fa-id-badge px-2"></i>Profile</x-navlink>
+        <x-navlink href="/profile" :active="request()->is('pengajuan_izin&cuti')"><i class="fa-solid fa-id-badge px-2"></i>Profile</x-navlink>
     </ul>
 </div>
