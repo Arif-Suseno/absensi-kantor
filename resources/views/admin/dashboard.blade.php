@@ -55,7 +55,7 @@
             </div>
 
             <!-- Log Aktivitas -->
-            <div class="bg-gradient-to-r from-yellow-500 to-yellow-400 shadow-lg rounded-lg p-6">
+            {{-- <div class="bg-gradient-to-r from-yellow-500 to-yellow-400 shadow-lg rounded-lg p-6">
                 <h3 class="text-xl font-semibold text-white mb-4 text-center">Log Aktivitas</h3>
                 <table class="w-full text-left table-auto bg-white rounded-lg shadow-md overflow-hidden" style="table-layout: fixed;">
                     <thead>
@@ -86,6 +86,6 @@
                 </table>
             </div>
 
-        </div>
+        </div> --}}
     </div>
 </x-layout>

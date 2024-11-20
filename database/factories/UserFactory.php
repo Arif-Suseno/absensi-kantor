@@ -2,9 +2,12 @@
 
 namespace Database\Factories;
 
-use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\Hash;
+use App\Models\User;
+use App\Models\Jabatan;
+use App\Models\Kontrak;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
@@ -21,13 +24,29 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $user = User::class; 
     public function definition(): array
     {
+        $jabatanIds = Jabatan::pluck('id');
+        $kontrakIds = Kontrak::pluck('id');
         return [
-            'name' => fake()->name(),
+            'kontrak_id' => $kontrakIds->random(),
+            'jabatan_id' => $jabatanIds->random(),
+            'nama' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
+            'gender' => fake()->randomElement(['L','P']),
+            'agama' => fake()->randomElement(['Islam','Kristen','Hindu','Buddha','Katolik','Konghucu']),
+            'tanggal_lahir' =>fake()->date(),
+            'tempat_lahir' => fake()->city(),
+            'no_hp' => fake()->phoneNumber(0,15),
+            'alamat' => fake()->address(),
+            'image'=> fake()->randomElement(['image1.png','image2.png','image3.png']),
+            'image_url' => fake()->imageUrl(),
+            'tanggal_mulai_kerja' => fake()->date(),
+            'jam_kerja' => fake()->randomElement(['08:00 - 12.00', '13:00 - 17.00']),
+            'role' => fake()->randomElement(['Admin', 'Karyawan']),
             'remember_token' => Str::random(10),
         ];
     }
