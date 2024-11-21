@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <a href="{{ route('admin.create_jabatan') }}" class="btn btn-primary mb-3">Tambah Jabatan</a>
+        <a href="{{ url('/admin/create_jabatan') }}" class="btn btn-primary mb-3">Tambah Jabatan</a>
 
         <table class="table table-bordered">
             <thead>
@@ -31,8 +31,8 @@
                         <td>{{ $jabatan->nama }}</td>
                         <td>{{ $jabatan->deskripsi }}</td>
                         <td>
-                            <a href="{{ route('jabatan.edit', $jabatan->id) }}" class="btn btn-warning">Edit</a>
-                            <form action="{{ route('jabatan.destroy', $jabatan->id) }}" method="POST" style="display:inline;">
+                            <a href="{{ url('/admin/edit_jabatan', $jabatan->id) }}" class="btn btn-warning">Edit</a>
+                            <form action="{{ url('/jabatan', $jabatan->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Hapus</button>

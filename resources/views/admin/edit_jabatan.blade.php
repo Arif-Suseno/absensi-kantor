@@ -8,7 +8,7 @@
     <div class="container">
         <h1>{{ $title }}</h1>
 
-        <form action="{{ route('jabatan.update', $jabatan->id) }}" method="POST">
+        <form action="{{ url('jabatan.update', $jabatan->id) }}" method="POST">
             @csrf
             @method('PUT')
             <div class="mb-3">

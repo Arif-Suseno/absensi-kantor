@@ -1,5 +1,3 @@
-<!-- resources/views/jabatan/create.blade.php -->
-
 <x-layout>
     <x-slot:title>
         {{ $title }}
@@ -8,7 +6,7 @@
     <div class="container">
         <h1>{{ $title }}</h1>
 
-        <form action="{{ route('jabatan.store') }}" method="POST">
+        <form action="{{ url('jabatan.store') }}" method="POST">
             @csrf
             <div class="mb-3">
                 <label for="nama" class="form-label">Nama Jabatan</label>
