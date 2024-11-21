@@ -40,7 +40,7 @@ class UserFactory extends Factory
             'agama' => fake()->randomElement(['Islam','Kristen','Hindu','Buddha','Katolik','Konghucu']),
             'tanggal_lahir' =>fake()->date(),
             'tempat_lahir' => fake()->city(),
-            'no_hp' => fake()->phoneNumber(0,15),
+            'no_hp' => substr(fake()->phoneNumber(), 0, 15),
             'alamat' => fake()->address(),
             'image'=> fake()->randomElement(['image1.png','image2.png','image3.png']),
             'image_url' => fake()->imageUrl(),

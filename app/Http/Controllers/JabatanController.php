@@ -7,59 +7,59 @@ use Illuminate\Http\Request;
 
 class JabatanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $jabatans = Jabatan::all();
+        $title = 'Daftar Jabatan'; // Judul halaman
+        return view('admin.jabatan', compact('jabatans', 'title'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+    // Menampilkan form untuk menambah jabatan
     public function create()
     {
-        //
+        $title = 'Tambah Jabatan';
+        return view('admin.create_jabatan', compact('title'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Menyimpan jabatan baru
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        Jabatan::create($request->all());
+        return redirect()->route('admin.jabatan')->with('success', 'Jabatan berhasil ditambahkan');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Jabatan $jabatan)
+    // Menampilkan form untuk mengedit jabatan
+    public function edit($id)
     {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        $title = 'Edit Jabatan';
+        return view('admin.edit_jabatan', compact('jabatan', 'title'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Jabatan $jabatan)
+    // Memperbarui jabatan
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'deskripsi' => 'nullable|string',
+        ]);
+
+        $jabatan = Jabatan::findOrFail($id);
+        $jabatan->update($request->all());
+        return redirect()->route('admin.jabatan')->with('success', 'Jabatan berhasil diperbarui');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Jabatan $jabatan)
+    // Menghapus jabatan
+    public function destroy($id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Jabatan $jabatan)
-    {
-        //
+        $jabatan = Jabatan::findOrFail($id);
+        $jabatan->delete();
+        return redirect()->route('admin.jabatan')->with('success', 'Jabatan berhasil dihapus');
     }
 }
+

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AbsensiController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::get('/dashboard_admin', function () {
@@ -19,3 +20,6 @@ Route::get('/absensi',  function (){
 });
 Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.absensi');
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit');
+
+Route::get('/jabatan', [JabatanController::class, 'index'])->name('admin.jabatan');
+
