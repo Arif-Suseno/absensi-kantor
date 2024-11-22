@@ -25,7 +25,7 @@ class JabatanController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama_jabatan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
 
@@ -45,7 +45,7 @@ class JabatanController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'nama_jabatan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
 

@@ -3,20 +3,33 @@
         {{ $title }}
     </x-slot:title>
 
-    <div class="container">
-        <h1>{{ $title }}</h1>
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">{{ $title }}</h1>
 
-        <form action="{{ url('jabatan.store') }}" method="POST">
+        <form action="{{ route('jabatan.store') }}" method="POST" class="bg-white p-6 rounded-lg shadow-md max-w-lg mx-auto">
             @csrf
-            <div class="mb-3">
-                <label for="nama" class="form-label">Nama Jabatan</label>
-                <input type="text" name="nama" id="nama" class="form-control" required>
+            <div class="mb-4">
+                <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">Nama Jabatan</label>
+                <input 
+                    type="text" 
+                    name="nama_jabatan" 
+                    id="nama" 
+                    class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    placeholder="Masukkan nama jabatan" 
+                    required>
             </div>
-            <div class="mb-3">
-                <label for="deskripsi" class="form-label">Deskripsi</label>
-                <textarea name="deskripsi" id="deskripsi" class="form-control"></textarea>
+            <div class="mb-4">
+                <label for="deskripsi" class="block text-sm font-medium text-gray-700 mb-2">Deskripsi</label>
+                <textarea 
+                    name="deskripsi" 
+                    id="deskripsi" 
+                    class="block w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                    rows="4" 
+                    placeholder="Masukkan deskripsi"></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Simpan</button>
+            <button type="submit" class="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+                Simpan
+            </button>
         </form>
     </div>
 </x-layout>

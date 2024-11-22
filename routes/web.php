@@ -23,10 +23,10 @@ Route::get('/absensi',  function (){
 Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.absensi');
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit');
 
-Route::get('/jabatan', [JabatanController::class, 'index'])->name('jabatan.index');
+Route::get('/jabatan', [JabatanController::class, 'index'])->name('admin.jabatan');
 Route::get('/admin/create_jabatan', [JabatanController::class, 'create'])->name('jabatan.create');
-// Route::post('/jabatan', [JabatanController::class, 'store'])->name('jabatan.store');
+Route::post('/jabatan', [JabatanController::class, 'store'])->name('jabatan.store');
 Route::get('/admin/{id}/edit_jabatan', [JabatanController::class, 'edit'])->name('jabatan.edit');
-// Route::put('/jabatan/{id}', [JabatanController::class, 'update'])->name('jabatan.update');
-// Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('jabatan.destroy');
+Route::put('/jabatan/{id}', [JabatanController::class, 'update'])->name('jabatan.update');
+Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('jabatan.destroy');
 
