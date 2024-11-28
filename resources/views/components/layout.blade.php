@@ -12,7 +12,7 @@
     <title>{{ $title }}</title>
 </head>
 
-<body>
+<body class="bg-gray-100">
     <x-header></x-header>
     <x-sidebar></x-sidebar>
     <main>

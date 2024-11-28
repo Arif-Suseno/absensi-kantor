@@ -56,4 +56,15 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function absensi()
+{
+    return $this->hasMany(Absensi::class);
+}
+
+public function cutiIzin()
+{
+    return $this->hasMany(CutiIzin::class);
+}
+
 }
