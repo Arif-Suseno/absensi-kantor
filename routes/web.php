@@ -1,12 +1,25 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\Controller;
+// use App\Http\Controllers\UserController;
+// use App\Http\Controllers\CutiIzinController;
 
-Route::get('/dashboard_admin', function () {
-    return view('admin.dashboard_admin', ["title"=> "Dashboard"]);
+Route::get('/', function () {
+    return view('welcome');
 });
+
+// Route::get('/dashboard_admin', function () {
+//     return view('admin.dashboard_admin', ["title"=> "Dashboard"]);
+// });
+// Route::get('/data_karyawan', function () {
+//     return view('admin.data_karyawan', ["title"=> "Data Karyawan"]);
+// });
+
+Route::get('/data_karyawan',[UserController::class,'show'])->name('data_karyawan');
+    
 
 // Data Karyawan start
 Route::get('/data_karyawan',[UserController::class,'indexDataKaryawan'])->name('Data Karyawan');
@@ -29,3 +42,15 @@ Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.abse
 Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit');
 
 Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil');
+
+// Route::get('/admin/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
+
+Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin');
+
+Route::resource('users', UserController::class);
+
+Route::get('/manajemen_absensi', [AbsensiController::class, 'index_manajemen'])->name('admin.manajemen_absensi');
+
+Route::resource('manajemen', AbsensiController::class);
+
+Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.profile_admin');

@@ -11,6 +11,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+      // Relasi ke model Jabatan (satu User memiliki satu Jabatan)
+    public function jabatan()
+    {
+        return $this->belongsTo(Jabatan::class);
+    }
+
+      // Relasi ke model Kontrak (satu User memiliki satu Kontrak)
+    public function kontrak()
+    {
+        return $this->belongsTo(Kontrak::class);
+    }
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
     
@@ -19,18 +30,11 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'gender',
-        'no_hp',
-        'alamat',
-        'jabatan_id',
-        'kontrak_id',
-        'tanggal_lahir',
-        'tempat_lahir',
-    ];
+    // protected $fillable = [
+    //     'name',
+    //     'email',
+    //     'password',
+    // ];
 
     protected $table = 'users';
     protected $guarded = [
@@ -62,19 +66,16 @@ class User extends Authenticatable
         ];
     }
     // Relasi ke model Jabatan (satu User memiliki satu Jabatan)
-  public function jabatan(): BelongsTo
-  {
-      return $this->belongsTo(Jabatan::class);
-  }
 
     // Relasi ke model Kontrak (satu User memiliki satu Kontrak)
-  public function kontrak(): BelongsTo
-  {
-      return $this->belongsTo(Kontrak::class);
-  }
     
     public function absensi()
     {
         return $this->hasMany(Absensi::class);
     }
+
+public function cutiIzin()
+{
+    return $this->hasMany(CutiIzin::class);
+}
 }
