@@ -1,7 +1,7 @@
 <div class="sidebar hidden">
     {{-- Link yang berasal component navlink --}}
-    <ul class="flex flex-col gap-2 w-8/12 h-full bg-gray-300 absolute md:w-4/12 lg:w-3/12 xl:w-2/12">
-        <x-navlink href="/dashboard" :active="request()->is('dashboard_admin')"><i class="fas fa-th-large px-2"></i> Dashboard
+    <ul class="flex flex-col gap-2 w-8/12 h-screen bg-gray-300 absolute md:w-4/12 lg:w-3/12 xl:w-2/12">
+        <x-navlink href="/dashboard" :active="request()->is('dashboard')"><i class="fas fa-th-large px-2"></i> Dashboard
             Admin</x-navlink>
         <x-navlink href="/manajemen_absensi" :active="request()->is('manajemen_absensi')"><i class="fas fa-calendar-check px-2"></i>Manajemen
             Absensi</x-navlink>

@@ -45,7 +45,7 @@ Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil'
 
 // Route::get('/admin/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
 
-Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin');
+Route::get('/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
 
 Route::resource('users', UserController::class);
 
