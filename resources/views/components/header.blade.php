@@ -1,5 +1,5 @@
 {{-- Component Header --}}
-<header class="flex flex-row justify-between w-full h-12 items-center bg-gray-300">
+<header class="flex flex-row justify-between w-full  h-12 items-center bg-gray-300">
     <section class="flex">
         {{-- Hamburger menu --}}
         <button type="button" class="flex flex-col m-2 p-1 box-border rounded-md">
