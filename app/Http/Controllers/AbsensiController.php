@@ -97,14 +97,14 @@ class AbsensiController extends Controller
 
         $manajemen = Absensi::findOrFail($id);
         $manajemen->update($request->all());
-        return redirect()->route('manajemen.index')->with('success', 'Absensi berhasil diperbarui!');
+        return redirect()->route('admin.manajemen_absensi')->with('success', 'Absensi berhasil diperbarui!');
     }
 
     public function destroy($id)
     {
         $manajemen = Absensi::findOrFail($id);
         $manajemen->delete();
-        return redirect()->route('manajemen.index')->with('success', 'Absensi berhasil dihapus!');
+        return redirect()->back()->with('success', 'Absensi berhasil dihapus!');
     }
 
 }

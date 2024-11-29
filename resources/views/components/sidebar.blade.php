@@ -1,7 +1,8 @@
+{{-- jangan DIHAPUS yang ini!!! --}}
 <div class="sidebar hidden">
-    {{-- Link yang berasal component navlink --}}
-    <ul class="flex flex-col gap-2 w-8/12 h-screen bg-gray-300 absolute md:w-4/12 lg:w-3/12 xl:w-2/12">
-        <x-navlink href="/dashboard" :active="request()->is('dashboard')"><i class="fas fa-th-large px-2"></i> Dashboard
+    <ul
+        class="flex flex-col gap-2 absolute left-0 z-10 top-12 bottom-0 w-8/12 bg-gray-300 md:w-4/12 lg:w-3/12 xl:w-2/12">
+        <x-navlink href="/dashboard_admin" :active="request()->is('dashboard_admin')"><i class="fas fa-th-large px-2"></i>Dashboard
             Admin</x-navlink>
         <x-navlink href="/manajemen_absensi" :active="request()->is('manajemen_absensi')"><i class="fas fa-calendar-check px-2"></i>Manajemen
             Absensi</x-navlink>
@@ -14,7 +15,7 @@
             Izin & Cuti</x-navlink>
         <x-navlink href="/profile_admin" :active="request()->is('pengajuan_izin&cuti')"><i class="fa-solid fa-id-card px-2"></i> Profile
             Admin</x-navlink>
-        <x-navlink href="/dashboard_karyawan" :active="request()->is('dashboard')"><i class="fas fa-th-large px-2"></i>Dashboard</x-navlink>
+        <x-navlink href="/dashboard" :active="request()->is('dashboard')"><i class="fas fa-th-large px-2"></i>Dashboard</x-navlink>
         <x-navlink href="/absensi" :active="request()->is('absensi')"><i class="fas fa-calendar-check px-2"></i>Absensi</x-navlink>
         <x-navlink href="/riwayat" :active="request()->is('riwayat')"><i
                 class="fa-solid fa-clock-rotate-left px-2"></i>Riwayat</x-navlink>

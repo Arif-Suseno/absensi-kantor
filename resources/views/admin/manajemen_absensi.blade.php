@@ -27,17 +27,16 @@
                             <td class="py-2 px-4 border flex justify-center items-center">
                                 <!-- Tombol Edit -->
                                 <a href="{{ route('manajemen.edit', $data->id) }}"
-                                   class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded mr-2">
+                                    class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded mr-2">
                                     Edit
                                 </a>
                                 <!-- Tombol Hapus -->
                                 <form action="{{ route('manajemen.destroy', $data->id) }}" method="POST"
-                                      class="inline-block">
+                                    class="inline-block">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit"
-                                            onclick="return confirm('Hapus Absensi?')"
-                                            class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded">
+                                    <button type="submit" onclick="return confirm('Hapus Absensi?')"
+                                        class="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded">
                                         Hapus
                                     </button>
                                 </form>
