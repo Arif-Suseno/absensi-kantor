@@ -13,11 +13,30 @@ use Illuminate\Contracts\Session\Session;
 class UserController extends Controller
 {
     // Menampilkan tabel data karyawan
-    public function indexDataKaryawan(User $user){
-        $users = $user->with(['kontrak', 'jabatan'])->orderBy('id', 'desc')->get();
-        return view('admin.data_karyawan', ['title' => 'Data Karyawan','users' => $users]);
+    public function indexDataKaryawan(Request $request, User $user)
+    {
+        // Ambil input pencarian dari query string
+        $search = $request->input('search');
+    
+        // Query dengan filter pencarian dan relasi
+        $users = $user->with(['kontrak', 'jabatan']) // Relasi eager loading
+            ->when($search, function ($query) use ($search) {
+                $query->where('nama', 'LIKE', "%$search%") // Filter kolom nama
+                    ->orWhere('role', 'LIKE', "%$search%") // Filter kolom role
+                    ->orWhere('gender', 'LIKE', "%$search%") // Filter kolom role
+                    ->orWhere('email', 'LIKE', "%$search%"); // Filter kolom role
+            })
+            ->orderBy('id', 'desc') // Urutkan berdasarkan ID secara menurun
+            ->paginate(10); // Batasi 10 data per halaman
+    
+        // Kirim data ke view
+        return view('admin.data_karyawan', [
+            'title' => 'Data Karyawan',
+            'users' => $users,
+            'search' => $search,
+        ]);
     }
-
+    
     // Menampilkan Data karyawan berdasarkan id ke detail karyawan
     public function showDetailKaryawan($id){
         // Menggunakan eager loading untuk menghindari N+1 query
