@@ -30,3 +30,4 @@ Route::get('/admin/{id}/edit_jabatan', [JabatanController::class, 'edit'])->name
 Route::put('/jabatan/{id}', [JabatanController::class, 'update'])->name('jabatan.update');
 Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('jabatan.destroy');
 
+Route::get('/riwayat', [AbsensiController::class, 'riwayat'])->name('karyawan.riwayat');

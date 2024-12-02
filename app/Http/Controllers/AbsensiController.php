@@ -17,28 +17,59 @@ class AbsensiController extends Controller
     }
 
     // Simpan data absensi
+    // public function store(Request $request)
+    // {
+    //     $request->validate([
+    //         'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
+    //     ]);
+
+    //     Absensi::create([
+    //         'user_id' => Auth::id(),
+    //         'tanggal' => Carbon::now()->toDateString(),
+    //         'waktu_masuk' => Carbon::now()->format('H:i:s'),
+    //         'waktu_keluar' =>  null,  // atau '00:00:00',
+    //         'status' => $request->status,
+    //     ]);
+
+    //     return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
+    // }
     public function store(Request $request)
     {
         $request->validate([
+            'user_id' => 'required|exists:users,id', // Validasi bahwa user_id ada di tabel users
             'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
         ]);
 
         Absensi::create([
-            'user_id' => Auth::id(),
+            'user_id' => $request->user_id,  // user_id dikirim dari permintaan
             'tanggal' => Carbon::now()->toDateString(),
             'waktu_masuk' => Carbon::now()->format('H:i:s'),
-            'waktu_keluar' =>  null,  // atau '00:00:00',
+            'waktu_keluar' => null,  // atau '00:00:00'
             'status' => $request->status,
         ]);
 
         return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
     }
 
-    // Tampilkan riwayat absensi karyawan
+    //Tampilkan riwayat absensi karyawan
     // public function riwayat()
     // {
     //     $absensi = Absensi::where('user_id', Auth::id())->orderBy('tanggal', 'desc')->get();
     //     return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
     // }
 
+    public function riwayat(Request $request)
+    {
+        // Validasi bahwa user_id ada di tabel users jika dikirimkan melalui request
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+        ]);
+
+        // Ambil absensi berdasarkan user_id dari request
+        $absensi = Absensi::where('user_id', $request->user_id)
+            ->orderBy('tanggal', 'desc')
+            ->get();
+
+        return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
+    }
 }
