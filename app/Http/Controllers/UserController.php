@@ -20,6 +20,7 @@ class UserController extends Controller
             'user' => $user,
         ]);
     }
+    // Data karyawan start
     // Menampilkan tabel data karyawan
     public function indexDataKaryawan(Request $request, User $user)
     {
@@ -184,7 +185,8 @@ class UserController extends Controller
         User::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Data berhasil dihapus!');
     }
-
+    // Data karyawan end
+    
     public function profile()
     {
         // Ambil data user pertama (atau user lain sesuai kebutuhan)
@@ -246,5 +248,6 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index')->with('success', 'User deleted successfully!');
     }
-    
+
+ 
 }

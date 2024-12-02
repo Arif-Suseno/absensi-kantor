@@ -1,5 +1,6 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
+
     <div class="h-screen">
         {{-- Link ke tambah karyawan --}}
         <div class="flex justify-between items-center my-4 md:mb-6">
