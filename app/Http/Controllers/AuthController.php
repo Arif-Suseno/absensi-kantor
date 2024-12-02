@@ -29,7 +29,14 @@ class AuthController extends Controller
 
         if(Auth::attempt($credencials)){
             $request->session()->regenerate();
-            return redirect()->intended('data_karyawan');
+            if($credencials['role'] === 'Admin'){
+                return redirect()->intended('data_karyawan');
+            }elseif ($credencials['role'] === 'Karyawan') {
+                return redirect()->intended('dashboard');
+
+            }
+
+            
         }
         return back()->withErrors('Login Gagal')->onlyInput('email');
     }
