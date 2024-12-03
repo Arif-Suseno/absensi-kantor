@@ -14,7 +14,7 @@
                         name="nama"
                         id="nama"
                         class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        value="{{ Auth::user()->name }}" readonly>
+                        value="{{ Auth::user()->name }}" >
                 </div>
                 <input type="hidden" name="user_id" value="{{ Auth::id() }}">
 
