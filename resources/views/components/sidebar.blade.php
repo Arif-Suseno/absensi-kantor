@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar hidden">
     {{-- Link yang berasal component navlink --}}
     <ul class="flex flex-col gap-2 w-8/12 h-full bg-gray-300 absolute md:w-4/12 lg:w-3/12 xl:w-2/12">
         <x-navlink href="/dashboard_admin" :active="request()->is('dashboard_admin')"><i class="fas fa-th-large px-2"></i> Dashboard
@@ -18,7 +18,7 @@
         <x-navlink href="/absensi" :active="request()->is('absensi')"><i class="fas fa-calendar-check px-2"></i>Absensi</x-navlink>
         <x-navlink href="/riwayat" :active="request()->is('riwayat')"><i
                 class="fa-solid fa-clock-rotate-left px-2"></i>Riwayat</x-navlink>
-        <x-navlink href="/pengajuan_izin&cuti" :active="request()->is('pengajuan_izin&cuti')"><i class="fa-solid fa-envelope px-2"></i>Pengajuan
+        <x-navlink href="/pengajuan_izincuti" :active="request()->is('pengajuan_izincuti')"><i class="fa-solid fa-envelope px-2"></i>Pengajuan
             Izin & Cuti</x-navlink>
         <x-navlink href="/profile" :active="request()->is('pengajuan_izin&cuti')"><i class="fa-solid fa-id-badge px-2"></i>Profile</x-navlink>
     </ul>

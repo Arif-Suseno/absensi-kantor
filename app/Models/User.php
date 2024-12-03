@@ -14,6 +14,10 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Jabatan::class);
     }
+    public function izinCuti()
+    {
+        return $this->hasMany(IzinCuti::class, 'user_id');
+    }
 
       // Relasi ke model Kontrak (satu User memiliki satu Kontrak)
     public function kontrak()
