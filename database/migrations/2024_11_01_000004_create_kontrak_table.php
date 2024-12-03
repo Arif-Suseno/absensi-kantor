@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('kontrak', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis_kontrak',['Permanen','Sementara','Magang']);
+            $table->string('nama');
             $table->integer('durasi_kontrak')->nullable();
-            $table->date('tanggal_mulai');
+            $table->date('tanggal_mulai')->nullable();
             $table->date('tanggal_selesai')->nullable();
             $table->text('deskripsi')->nullable();
             $table->timestamps();
