@@ -51,24 +51,22 @@ class AbsensiController extends Controller
         return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
     }
 
+    
     //Tampilkan riwayat absensi karyawan
-    // public function riwayat()
-    // {
-    //     $absensi = Absensi::where('user_id', Auth::id())->orderBy('tanggal', 'desc')->get();
-    //     return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
-    // }
-
     public function riwayat(Request $request)
     {
-        // Validasi bahwa user_id ada di tabel users jika dikirimkan melalui request
-        $request->validate([
-            'user_id' => 'required|exists:users,id',
-        ]);
+        // Ambil user_id dari request, default ke ID user login (jika menggunakan autentikasi)
+        $userId = $request->user_id ?? auth()->id();
 
-        // Ambil absensi berdasarkan user_id dari request
-        $absensi = Absensi::where('user_id', $request->user_id)
+        // Ambil data absensi
+        $absensi = Absensi::where('user_id', $userId)
             ->orderBy('tanggal', 'desc')
             ->get();
+
+        // Jika absensi kosong, tampilkan pesan tanpa error
+        if ($absensi->isEmpty()) {
+            return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
+        }
 
         return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
     }

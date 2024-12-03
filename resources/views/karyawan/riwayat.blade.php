@@ -65,7 +65,7 @@
                 {{ session('success') }}
             </div>
         @endif
-@dd($absensi)
+        
         <h1 class="text-3xl font-bold text-gray-800 mb-6">{{ $title }}</h1>
 
         <!-- Tabel Riwayat Absensi -->
