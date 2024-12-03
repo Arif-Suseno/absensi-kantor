@@ -62,7 +62,9 @@ Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admi
 Route::resource('users', UserController::class);
 
 Route::get('/manajemen_absensi', [AbsensiController::class, 'index_manajemen'])->name('admin.manajemen_absensi');
+
 Route::resource('manajemen', AbsensiController::class);
+
 Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.profile_admin');
 
 // Login start
