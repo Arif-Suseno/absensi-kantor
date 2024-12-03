@@ -33,7 +33,7 @@ class CutiIzinController extends Controller
         // Menyimpan pengajuan
         IzinCuti::create($validated);
 
-        return redirect()->route('pengajuan_cutiizin.create')
+        return redirect()->route('karyawan.pengajuan_cutiizin')
                          ->with('success', 'Pengajuan cuti/izin berhasil dikirim.');
     }
 }

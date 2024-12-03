@@ -25,13 +25,13 @@ Route::get('/data_karyawan',[UserController::class,'show'])->name('data_karyawan
     
 
 // Data Karyawan start
-Route::get('/data_karyawan',[UserController::class,'indexDataKaryawan'])->name('Data Karyawan')->middleware('auth');
-Route::get('/data_karyawan/{id}/detail', [UserController::class, 'showDetailKaryawan'])->name('Detail {ID} Karyawan')->middleware('auth'); 
-Route::get('/tambah_karyawan', [UserController::class, 'indexTambahKaryawan'])->name('Tambah Karyawan')->middleware('auth');
-Route::post('/tambah_karyawan', [UserController::class, 'storeTambahKaryawan'])->middleware('auth');
-Route::get('/data_karyawan/{id}/edit', [UserController::class, 'showEditKaryawan'])->middleware('auth');
-Route::patch('/data_karyawan/{id}/update', [UserController::class, 'updateDataKaryawan'])->middleware('auth');
-Route::get('/data_karyawan/{id}/delete', [UserController::class, 'deleteDataKaryawan'])->middleware('auth');
+Route::get('/data_karyawan',[UserController::class,'indexDataKaryawan'])->name('Data Karyawan');
+Route::get('/data_karyawan/{id}/detail', [UserController::class, 'showDetailKaryawan'])->name('Detail {ID} Karyawan'); 
+Route::get('/tambah_karyawan', [UserController::class, 'indexTambahKaryawan'])->name('Tambah Karyawan');
+Route::post('/tambah_karyawan', [UserController::class, 'storeTambahKaryawan']);
+Route::get('/data_karyawan/{id}/edit', [UserController::class, 'showEditKaryawan']);
+Route::patch('/data_karyawan/{id}/update', [UserController::class, 'updateDataKaryawan']);
+Route::get('/data_karyawan/{id}/delete', [UserController::class, 'deleteDataKaryawan']);
 // Data Karyawan end
 
 
@@ -51,13 +51,13 @@ Route::get('/pengajuan_izincuti', function () {
     return view('karyawan.pengajuan_izincuti');
 });
 
-// Route::middleware('auth')->group(function () {
-    Route::get('karyawan/pengajuan-cutiizin', [CutiIzinController::class, 'create'])->name('pengajuan_cutiizin.create');
-    Route::post('karyawan/pengajuan-cutiizin', [CutiIzinController::class, 'store'])->name('pengajuan_cutiizin.store');
-// });
+
+Route::get('pengajuan_cutiizin', [CutiIzinController::class, 'create'])->name('karyawan.pengajuan_cutiizin');
+Route::post('pengajuan_cutiizin', [CutiIzinController::class, 'store'])->name('pengajuan_cutiizin.store');
+
 // Route::get('/admin/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
 
-Route::get('/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
+Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin');
 
 Route::resource('users', UserController::class);
 

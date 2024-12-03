@@ -20,7 +20,6 @@ class KontrakFactory extends Factory
     {
         return [
             "nama" => fake()->randomElement(['Permanen','Kontrak Sementara', 'Kontrak Magang',]),
-            "jenis_kontrak" => fake()->randomElement(['Permanen', 'Sementara', 'Magang']),
             'durasi_kontrak' => fake()->randomElement([3,6,12,24,null]),
             "tanggal_mulai" => fake()->date(),
             "tanggal_selesai" => fake()->optional()->date(),
