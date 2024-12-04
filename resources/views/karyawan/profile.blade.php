@@ -4,7 +4,7 @@
         
     <div class="h-screen">
         <div class="flex items-center justify-center min-h-auto">
-            <div class="bg-white shadow-lg rounded-lg w-full  max-w-md p-6">
+            <div class="bg-white shadow-lg rounded-lg w-full  max-w-md p-6 shadow shadow-black">
                 <div class="text-center mb-6">
                     <h2 class="text-2xl font-bold text-gray-700">Profil Karyawan</h2>
                     <p class="text-sm text-gray-500">Detail Informasi Anda</p>

@@ -7,7 +7,7 @@
 
             <!-- Header -->
             <header class="mb-6 text-center">
-                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 shadow-md p-4">
+                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-white to-black shadow-md p-4">
                     Dashboard Admin
                 </h2>
             </header>

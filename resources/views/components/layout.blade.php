@@ -13,7 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="bg-custom-gradient">
+<body class="min-h-screen bg-gradient-to-r from-blue-900 to-gray-500 text-gray-800">
     <x-header></x-header>
     <x-sidebar></x-sidebar>
     <main>

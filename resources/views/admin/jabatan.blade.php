@@ -25,9 +25,9 @@
 
         <!-- Tabel Responsif -->
         <div class="overflow-x-auto">
-            <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+            <table class="min-w-full bg-white border-gray-400 rounded-lg shadow-md">
                 <thead>
-                    <tr class="bg-gray-100">
+                    <tr class="bg-gray-500">
                         <th class="text-left px-4 sm:px-6 py-3 text-sm font-medium text-gray-600 border-b">
                             Nama
                         </th>

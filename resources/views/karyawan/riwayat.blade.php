@@ -10,6 +10,7 @@
 
         <h1 class="text-3xl font-bold text-gray-800 mb-6">Riwayat Absensi</h1>
 
+        
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                 <thead>

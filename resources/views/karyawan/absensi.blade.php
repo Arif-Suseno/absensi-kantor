@@ -1,13 +1,13 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
 
-    <div class="flex-1 flex items-center justify-center">
-        <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg">
+    <div class="flex-1 flex items-center justify-center ">
+        <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg shadow shadow-black">
             <h1 class="text-2xl font-bold mb-6 text-center">Formulir Absensi</h1>
 
-            <form action="{{ route('karyawan.absensi.submit') }}" method="POST">
+            <form action="{{ route('karyawan.absensi.submit') }}" method="POST" >
                 @csrf
-                <div class="mb-4">
+                <div class="mb-4 ">
                     <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
                     <input
                         type="text"

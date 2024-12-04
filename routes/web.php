@@ -52,7 +52,7 @@ Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil'
 
 // Route::get('/admin/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
 
-Route::get('/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard')->middleware('auth')->middleware('auth');
+Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin')->middleware('auth')->middleware('auth');
 
 Route::resource('users', UserController::class)->middleware('auth');
 
