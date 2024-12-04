@@ -61,6 +61,10 @@ Route::resource('manajemen', AbsensiController::class)->middleware('auth');
 
 Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.profile_admin')->middleware('auth');
 
+Route::get('/persetujuan_izin&cuti', [CutiIzinController::class, 'persetujuanIzinIndex'])->name('admin.persetujuan_izin&cuti');
+Route::patch('/persetujuan_izin&cuti/{id}', [CutiIzinController::class, 'persetujuanIzinUpdate'])->name('admin.persetujuan.izin');
+
+
 // Login start
 Route::get('/login',[AuthController::class, 'login'])->name('login');
 Route::post('/login',[AuthController::class, 'autentication']);
