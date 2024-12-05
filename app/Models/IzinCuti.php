@@ -21,7 +21,7 @@ class IzinCuti extends Model
         'alasan',
         'status',
     ];
-
+    
     // Relasi dengan tabel users (jika ada)
     public function user()
     {

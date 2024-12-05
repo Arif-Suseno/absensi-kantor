@@ -18,12 +18,7 @@ class CutiIzin extends Model
         return $this->belongsTo(User::class);
     }
     // Kolom yang dapat diisi
-    protected $fillable = [
-        'user_id',
-        'jenis',
-        'alasan',
-        'status',
-    ];
+    
 
 
 }

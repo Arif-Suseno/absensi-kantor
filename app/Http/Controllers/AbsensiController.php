@@ -14,38 +14,38 @@ class AbsensiController extends Controller
 {
     // Tampilkan halaman absensi dengan formulir
     public function index()
-{
-    return view('karyawan.absensi', ['title' => 'Formulir Absensi']);
-}
+    {
+        return view('karyawan.absensi', ['title' => 'Formulir Absensi']);
+    }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'user_id' => 'required|exists:users,id',
-        'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'user_id' => 'required|exists:users,id',
+            'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
+        ]);
 
-    Absensi::create([
-        'user_id' => $request->user_id,
-        'tanggal' => Carbon::now()->toDateString(),
-        'waktu_masuk' => Carbon::now()->format('H:i:s'),
-        'waktu_keluar' => null,
-        'status' => $request->status,
-    ]);
+        Absensi::create([
+            'user_id' => $request->user_id,
+            'tanggal' => Carbon::now()->toDateString(),
+            'waktu_masuk' => Carbon::now()->format('H:i:s'),
+            'waktu_keluar' => null,
+            'status' => $request->status,
+        ]);
 
-    return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
-}
+        return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
+    }
 
-public function riwayat(Request $request)
-{
-    $userId = $request->user_id ?? Auth::id();
+    public function riwayat()
+    {
+        $userId = auth()->user()->id; // Ambil ID pengguna yang sedang login
+        $absensi = Absensi::where('user_id', $userId)->get(); // Ambil data absensi milik pengguna
+        $title = 'Riwayat Absensi';
 
-    $absensi = Absensi::where('user_id', $userId)
-        ->orderBy('tanggal', 'desc')
-        ->get();
+        return view('karyawan.riwayat', compact('absensi', 'title'));
+    }
 
-    return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
-}
+
     public function index_manajemen()
     {
         $manajemen = Absensi::with('user')->get();
@@ -53,36 +53,36 @@ public function riwayat(Request $request)
     }
 
 
-    public function create()
-    {
-        $users = User::all();
-        return view('admin.manajemen_create', ["title" => "Manajemen Create"], compact('users'));
-    }
+    // public function create()
+    // {
+    //     $users = User::all();
+    //     return view('admin.manajemen_create', ["title" => "Manajemen Create"], compact('users'));
+    // }
 
 
-    public function store_manajemen(Request $request)
-    {
-        $request->validate([
-            'user_id' => 'required',
-            'tanggal' => 'required|date',
-            'status' => 'required'
-        ]);
+    // public function store_manajemen(Request $request)
+    // {
+    //     $request->validate([
+    //         'user_id' => 'required',
+    //         'tanggal' => 'required|date',
+    //         'status' => 'required'
+    //     ]);
 
-        // Absensi::create($request->all());
-        $manajemen = new Absensi;
-        $manajemen->user_id = $request->user_id;
-        $manajemen->tanggal = $request->tanggal;
-        $manajemen->status = $request->status;
+    //     // Absensi::create($request->all());
+    //     $manajemen = new Absensi;
+    //     $manajemen->user_id = $request->user_id;
+    //     $manajemen->tanggal = $request->tanggal;
+    //     $manajemen->status = $request->status;
 
-        // Menambahkan waktu_masuk saat absensi dibuat
-        $manajemen->waktu_masuk = now(); // `now()` mengambil waktu saat ini
+    //     // Menambahkan waktu_masuk saat absensi dibuat
+    //     $manajemen->waktu_masuk = now(); // `now()` mengambil waktu saat ini
 
-        $manajemen = Absensi::with('user')->get(); // Mengambil data absensi beserta data user
+    //     $manajemen = Absensi::with('user')->get(); // Mengambil data absensi beserta data user
 
-        $manajemen->save();
+    //     $manajemen->save();
 
-        return redirect()->route('manajemen.index')->with('success', 'Absensi berhasil ditambahkan!');
-    }
+    //     return redirect()->route('manajemen.index')->with('success', 'Absensi berhasil ditambahkan!');
+    // }
 
     public function edit($id)
     {
@@ -110,5 +110,4 @@ public function riwayat(Request $request)
         $manajemen->delete();
         return redirect()->back()->with('success', 'Absensi berhasil dihapus!');
     }
-
 }
