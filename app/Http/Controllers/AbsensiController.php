@@ -14,34 +14,38 @@ class AbsensiController extends Controller
 {
     // Tampilkan halaman absensi dengan formulir
     public function index()
-    {
-        return view('karyawan.absensi', ['title' => 'Formulir Absensi']);
-    }
+{
+    return view('karyawan.absensi', ['title' => 'Formulir Absensi']);
+}
 
-    // Simpan data absensi
-    public function store(Request $request)
-    {
-        $request->validate([
-            'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'user_id' => 'required|exists:users,id',
+        'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
+    ]);
 
-        Absensi::create([
-            'user_id' => Auth::id(),
-            'tanggal' => Carbon::now()->toDateString(),
-            'waktu_masuk' => Carbon::now()->format('H:i:s'),
-            'waktu_keluar' =>  null,  // atau '00:00:00',
-            'status' => $request->status,
-        ]);
+    Absensi::create([
+        'user_id' => $request->user_id,
+        'tanggal' => Carbon::now()->toDateString(),
+        'waktu_masuk' => Carbon::now()->format('H:i:s'),
+        'waktu_keluar' => null,
+        'status' => $request->status,
+    ]);
 
-        return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
-    }
+    return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
+}
 
-    // Tampilkan riwayat absensi karyawan
-    // public function riwayat()
-    // {
-    //     $absensi = Absensi::where('user_id', Auth::id())->orderBy('tanggal', 'desc')->get();
-    //     return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
-    // }
+public function riwayat(Request $request)
+{
+    $userId = $request->user_id ?? Auth::id();
+
+    $absensi = Absensi::where('user_id', $userId)
+        ->orderBy('tanggal', 'desc')
+        ->get();
+
+    return view('karyawan.riwayat', compact('absensi'), ['title' => 'Riwayat Absensi']);
+}
     public function index_manajemen()
     {
         $manajemen = Absensi::with('user')->get();

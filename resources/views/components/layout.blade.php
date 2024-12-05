@@ -13,11 +13,11 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 </head>
 
-<body class="relative bg-gray-100">
+<body class="min-h-screen bg-gradient-to-r from-blue-900 to-gray-500 text-gray-800">
     <x-header></x-header>
     <x-sidebar></x-sidebar>
     <main>
-        <div class="container w-full mx-auto px-2 pt-2 md:px-3 md:pt-3 lg:pt-4 xl:px-2 xl:pt-5">
+    <div class="container h-full mx-auto px-2 pt-2 md:px-3 md:pt-3 lg:pt-4 xl:px-0 xl:pt-5">
             {{ $slot }}
         </div>
     </main>

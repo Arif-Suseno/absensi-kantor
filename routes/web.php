@@ -7,12 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
-// use App\Http\Controllers\UserController;
-// use App\Http\Controllers\CutiIzinController;
+use App\Http\Controllers\JabatanController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 // Route::get('/dashboard_admin', function () {
 //     return view('admin.dashboard_admin', ["title"=> "Dashboard"]);
@@ -34,14 +31,25 @@ Route::patch('/data_karyawan/{id}/update', [UserController::class, 'updateDataKa
 Route::get('/data_karyawan/{id}/delete', [UserController::class, 'deleteDataKaryawan'])->middleware("auth");
 // Data Karyawan end
 
-
+//Absensi
 Route::get('/absensi',  function (){
     return view('karyawan.absensi', ["title" => "Absensi"]);
-});
-Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.absensi');
-Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit');
+})->middleware('auth');
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.absensi')->middleware('auth');
+Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit')->middleware('auth');
+Route::get('/riwayat', [AbsensiController::class, 'riwayat'])->name('karyawan.riwayat')->middleware('auth');
+//EndAbsensi
 
-Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil');
+//Jabatan
+Route::get('/jabatan', [JabatanController::class, 'index'])->name('admin.jabatan')->middleware('auth');
+Route::get('/admin/create_jabatan', [JabatanController::class, 'create'])->name('jabatan.create')->middleware('auth');
+Route::post('/jabatan', [JabatanController::class, 'store'])->name('jabatan.store')->middleware('auth');
+Route::get('/admin/{id}/edit_jabatan', [JabatanController::class, 'edit'])->name('jabatan.edit')->middleware('auth');
+Route::put('/jabatan/{id}', [JabatanController::class, 'update'])->name('jabatan.update')->middleware('auth');
+Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('jabatan.destroy')->middleware('auth');
+//EndJabatan
+
+Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil')->middleware('auth');
 
 Route::resource('kontrak', KontrakController::class);
 
@@ -57,15 +65,19 @@ Route::post('pengajuan_cutiizin', [CutiIzinController::class, 'store'])->name('p
 
 // Route::get('/admin/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
 
-Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin');
+Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin')->middleware('auth')->middleware('auth');
 
-Route::resource('users', UserController::class);
 
-Route::get('/manajemen_absensi', [AbsensiController::class, 'index_manajemen'])->name('admin.manajemen_absensi');
+Route::resource('users', UserController::class)->middleware('auth');
 
-Route::resource('manajemen', AbsensiController::class);
+Route::get('/manajemen_absensi', [AbsensiController::class, 'index_manajemen'])->name('admin.manajemen_absensi')->middleware('auth');
+Route::resource('manajemen', AbsensiController::class)->middleware('auth');
 
-Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.profile_admin');
+Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.profile_admin')->middleware('auth');
+
+Route::get('/persetujuan_izin&cuti', [CutiIzinController::class, 'persetujuanIzinIndex'])->name('admin.persetujuan_izin&cuti');
+Route::patch('/persetujuan_izin&cuti/{id}', [CutiIzinController::class, 'persetujuanIzinUpdate'])->name('admin.persetujuan.izin');
+
 
 // Login start
 Route::get('/login',[AuthController::class, 'login'])->name('login');

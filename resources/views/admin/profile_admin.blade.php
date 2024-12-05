@@ -10,8 +10,8 @@
                     <img src="{{ Vite::asset('public/images/profile.png') }}" alt="Foto Profil"
                         class="w-40 h-40 rounded-full border-4 border-blue-500 mx-auto object-cover">
                 </div>
-                <h1 class="text-3xl font-semibold mt-4 text-gray-800">{{ $user->nama }}</h1>
-                <p class="text-gray-500 text-md">{{ $user->role }}</p>
+                <h1 class="text-3xl font-semibold mt-4 text-gray-800">{{ auth()->user()->nama }}</h1>
+                <p class="text-gray-500 text-md">{{ auth()->user()->role }}</p>
             </div>
 
             <hr class="my-6 border-gray-300">
@@ -28,28 +28,28 @@
             <div id="detailInfo" class="space-y-4 text-lg mt-4 hidden">
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">Email:</span>
-                    <span class="text-gray-900">{{ $user->email }}</span>
+                    <span class="text-gray-900">{{ auth()->user()->email }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">Gender:</span>
-                    <span class="text-gray-900">{{ $user->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</span>
+                    <span class="text-gray-900">{{ auth()->user()->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">Agama:</span>
-                    <span class="text-gray-900">{{ $user->agama }}</span>
+                    <span class="text-gray-900">{{ auth()->user()->agama }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">TTL:</span>
-                    <span class="text-gray-900">{{ $user->tempat_lahir }},
-                        {{ \Carbon\Carbon::parse($user->tanggal_lahir)->format('d M Y') }}</span>
+                    <span class="text-gray-900">{{ auth()->user()->tempat_lahir }},
+                        {{ \Carbon\Carbon::parse(auth()->user()->tanggal_lahir)->format('d M Y') }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">No HP:</span>
-                    <span class="text-gray-900">{{ $user->no_hp }}</span>
+                    <span class="text-gray-900">{{ auth()->user()->no_hp }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">Alamat:</span>
-                    <span class="text-gray-900">{{ $user->alamat }}</span>
+                    <span class="text-gray-900">{{ auth()->user()->alamat }}</span>
                 </div>
             </div>
         </div>

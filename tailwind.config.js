@@ -6,7 +6,11 @@ export default {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            backgroundImage: {
+                'custom-gradient': 'linear-gradient(90deg, #00FFA1, #FFFFFF,#FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFFFFF, #FFCD70)',
+            }
+        },
     },
     plugins: [],  
 };
