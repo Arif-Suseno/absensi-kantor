@@ -16,7 +16,7 @@ class Kontrak extends Model
      * Fields that can be mass assigned.
      */
     protected $fillable = [
-        'jenis_kontrak',
+        'nama',
         'durasi_kontrak',
         'tanggal_mulai',
         'tanggal_selesai',
