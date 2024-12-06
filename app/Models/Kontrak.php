@@ -15,14 +15,11 @@ class Kontrak extends Model
     /**
      * Fields that can be mass assigned.
      */
-    protected $fillable = [
-        'nama',
-        'durasi_kontrak',
-        'tanggal_mulai',
-        'tanggal_selesai',
-        'deskripsi',
-    ];
-
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at'
+        ];
     /**
      * Accessor: Format tanggal_mulai (opsional).
      */

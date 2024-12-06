@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 class="text-2xl sm:text-3xl font-bold text-gray-800 mb-6 text-center sm:text-left">
+        <h1 class="text-2xl sm:text-3xl font-bold text-white mb-6 text-center sm:text-left">
             {{ $title }}
         </h1>
 
@@ -27,7 +27,7 @@
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border-gray-400 rounded-lg shadow-md">
                 <thead>
-                    <tr class="bg-gray-500">
+                    <tr class="bg-gray-400">
                         <th class="text-left px-4 sm:px-6 py-3 text-sm font-medium text-gray-600 border-b">
                             Nama
                         </th>
