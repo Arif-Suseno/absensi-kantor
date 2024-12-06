@@ -51,10 +51,7 @@ Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('jab
 
 Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil')->middleware('auth');
 
-Route::get('/kontrak', [KontrakController::class,'index'])->name( 'kontrak');
-Route::get('/tambah_kontrak', [KontrakController::class,'create'])->name('tambah kontrak');
-Route::post('/tambah_kontrak', [KontrakController::class,'store'])->name('fungsi tambah kontrak');
-Route::get('/edit_kontrak/{id}', [KontrakController::class,'edit'])->name('edit kontrak');
+Route::resource('kontrak', KontrakController::class);
 
 // Route::get('/pengajuan_izincuti', [CutiIzinController::class, 'create'])->name('karyawan.pengajuan_izincuti');
 

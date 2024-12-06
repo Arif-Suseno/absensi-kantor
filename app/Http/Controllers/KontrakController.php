@@ -8,12 +8,11 @@ use Illuminate\Http\Request;
 class KontrakController extends Controller
 {
     // Menampilkan daftar kontrak
-    public function index()
+    public function index(Kontrak $kontrak)
     {
-        $kontrak = Kontrak::all();
         return view('admin.kontrak', [
             "title" => "Kontrak",
-            "kontrak" => $kontrak,
+            "kontrak" => $kontrak->all(),
         ]);
     }
 
