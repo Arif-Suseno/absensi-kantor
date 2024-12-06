@@ -32,7 +32,7 @@ class Controller
             ->get();
 
         // Return view dengan data
-        return view('admin.dashboard', compact('karyawan', 'cutiLogs', 'absensiLogs'))->with('title', 'Dashboard Admin');
+        return view('admin.dashboard_admin', compact('karyawan', 'cutiLogs', 'absensiLogs'))->with('title', 'Dashboard Admin');
     }
 }
 

@@ -8,12 +8,34 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Kontrak extends Model
 {
-       // Relasi ke model User (satu Kon bisa dimiliki oleh banyak User)
-       public function users()
-       {
-           return $this->hasMany(User::class);
-       }
-    /** @use HasFactory<\Database\Factories\KontrakFactory> */
     use HasFactory;
+
     protected $table = 'kontrak';
+
+    /**
+     * Fields that can be mass assigned.
+     */
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at'
+        ];
+
+    /**
+     * Accessor: Format tanggal_mulai (opsional).
+     */
+    public function getFormattedTanggalMulaiAttribute()
+    {
+        return date('d-m-Y', strtotime($this->tanggal_mulai));
+    }
+
+    /**
+     * Accessor: Format tanggal_selesai (opsional).
+     */
+    public function getFormattedTanggalSelesaiAttribute()
+    {
+        return $this->tanggal_selesai
+            ? date('d-m-Y', strtotime($this->tanggal_selesai))
+            : null;
+    }
 }

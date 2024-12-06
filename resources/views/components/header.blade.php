@@ -1,5 +1,5 @@
 {{-- Component Header --}}
-<header class="flex justify-between items-center w-full h-14 px-4  bg-gray-300">
+<header class="flex justify-between items-center w-full h-14 pl-4 pr-20 bg-gray-400">
     <section class="flex items-center gap-2">
         {{-- Hamburger menu --}}
         <button type="button" class="flex flex-col box-border rounded-md">
@@ -16,7 +16,7 @@
     <section class="flex items-center gap-4 rounded-full">
         {{-- Link logout --}}
         <a href="{{ url('/logout') }}"
-            class="p-1 bg-orange-400 border border-black shadow shadow-orange-900 rounded-md text-sm hover:bg-orange-500">
+            class="p-1 bg-violet-500 border border-black shadow shadow-violet-950 rounded-md text-sm hover:bg-violet-700">
             Logout
         </a>
         {{-- Profile --}}

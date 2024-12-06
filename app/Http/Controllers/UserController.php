@@ -173,7 +173,7 @@ class UserController extends Controller
        if (!empty($validatedData['password'])) {
         $validatedData['password'] = bcrypt($validatedData['password']);
     } else {
-        unset($validatedData['password']);
+        $validatedData['password'] = $user->password;
     }
     
     // Update data user
