@@ -13,7 +13,7 @@
                 <thead class="bg-gray-100">
                     <tr>
                         <th class="px-4 py-2 text-left text-gray-600 font-medium">#</th>
-                        <th class="px-4 py-2 text-left text-gray-600 font-medium">Jenis Kontrak</th>
+                        <th class="px-4 py-2 text-left text-gray-600 font-medium">Nama</th>
                         <th class="px-4 py-2 text-left text-gray-600 font-medium">Durasi</th>
                         <th class="px-4 py-2 text-left text-gray-600 font-medium">Tanggal Mulai</th>
                         <th class="px-4 py-2 text-left text-gray-600 font-medium">Tanggal Selesai</th>
@@ -24,7 +24,7 @@
                     @foreach ($kontrak as $item)
                         <tr>
                             <td class="px-4 py-2">{{ $item->id }}</td>
-                            <td class="px-4 py-2">{{ $item->jenis_kontrak }}</td>
+                            <td class="px-4 py-2">{{ $item->nama }}</td>
                             <td class="px-4 py-2">{{ $item->durasi_kontrak ?? '-' }}</td>
                             <td class="px-4 py-2">{{ $item->tanggal_mulai }}</td>
                             <td class="px-4 py-2">{{ $item->tanggal_selesai ?? '-' }}</td>

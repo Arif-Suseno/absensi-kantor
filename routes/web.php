@@ -23,7 +23,7 @@ Route::get('/data_karyawan',[UserController::class,'show'])->name('data_karyawan
 
 // Data Karyawan start
 Route::get('/data_karyawan',[UserController::class,'indexDataKaryawan'])->name('Data Karyawan')->middleware("auth");
-Route::get('/data_karyawan/{id}/detail', [UserController::class, 'showDetailKaryawan'])->name('Detail {ID} Karyawan')->middleware("auth");; 
+Route::get('/data_karyawan/{id}/detail', [UserController::class, 'showDetailKaryawan'])->name('Detail {ID} Karyawan')->middleware("auth");
 Route::get('/tambah_karyawan', [UserController::class, 'indexTambahKaryawan'])->name('Tambah Karyawan')->middleware("auth");
 Route::post('/tambah_karyawan', [UserController::class, 'storeTambahKaryawan'])->middleware("auth");
 Route::get('/data_karyawan/{id}/edit', [UserController::class, 'showEditKaryawan'])->middleware("auth");
@@ -51,7 +51,10 @@ Route::delete('/jabatan/{id}', [JabatanController::class, 'destroy'])->name('jab
 
 Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil')->middleware('auth');
 
-Route::resource('kontrak', KontrakController::class);
+Route::get('/kontrak', [KontrakController::class,'index'])->name( 'kontrak');
+Route::get('/tambah_kontrak', [KontrakController::class,'create'])->name('tambah kontrak');
+Route::post('/tambah_kontrak', [KontrakController::class,'store'])->name('fungsi tambah kontrak');
+Route::get('/edit_kontrak/{id}', [KontrakController::class,'edit'])->name('edit kontrak');
 
 // Route::get('/pengajuan_izincuti', [CutiIzinController::class, 'create'])->name('karyawan.pengajuan_izincuti');
 

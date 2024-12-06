@@ -27,19 +27,13 @@ class KontrakController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'jenis_kontrak' => 'required|in:Permanen,Sementara,Magang',
+            'nama' => 'required|in:Permanen,Sementara,Magang',
+            'durasi_kontrak' => 'nullable|integer|min:0',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
-            'durasi_kontrak' => 'nullable|integer|min:0',
+            'deskripsi'=> 'nullable|string',
         ]);
-
-        Kontrak::create($request->only([
-            'jenis_kontrak',
-            'durasi_kontrak',
-            'tanggal_mulai',
-            'tanggal_selesai',
-            'deskripsi',
-        ]));
+        Kontrak::create($request->all());
 
         return redirect()->route('kontrak.index')->with('success', 'Kontrak berhasil ditambahkan.');
     }
@@ -57,14 +51,14 @@ class KontrakController extends Controller
     public function update(Request $request, Kontrak $kontrak)
     {
         $request->validate([
-            'jenis_kontrak' => 'required|in:Permanen,Sementara,Magang',
+            'nama' => 'required|in:Permanen,Sementara,Magang',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'durasi_kontrak' => 'nullable|integer|min:0',
         ]);
 
         $kontrak->update($request->only([
-            'jenis_kontrak',
+            'nama',
             'durasi_kontrak',
             'tanggal_mulai',
             'tanggal_selesai',
