@@ -186,7 +186,7 @@ class UserController extends Controller
 }
 
 // Menghapus data karyawan
-public function deleteDataKaryawan($id){
+    public function deleteDataKaryawan($id){
     User::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Data berhasil dihapus!');
     }
@@ -196,8 +196,8 @@ public function deleteDataKaryawan($id){
     {
         $user = Auth::user(); 
         $user->load(['jabatan', 'kontrak']);
-        return view('karyawan.profile', [
-            'title' => 'Profil Karyawan',
+        return view('profile', [
+            'title' => 'Profil',
             'user' => $user,
         ]);
     }
@@ -250,16 +250,6 @@ public function deleteDataKaryawan($id){
             }
     }
     
-    // Profile karyawan end
-    public function profile(User $user)
-    {
-        // Ambil data user pertama (atau user lain sesuai kebutuhan)
-        $users = Auth::user(); 
-        $user->with(['jabatan', 'karyawan'])->findOrFail($users->id);
-
-        // Kirim data ke view
-        return view('admin.profile_admin', ["title" => "Profile Admin"],compact('user'));
-    }
 
     public function show(){
         $users = User::all();

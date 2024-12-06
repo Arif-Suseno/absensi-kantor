@@ -1,7 +1,6 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
     @auth
-<<<<<<< HEAD
         <div class="h-screen">
             <div class="flex items-center justify-center min-h-auto">
                 <div class="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
@@ -13,7 +12,7 @@
                     <div class="flex justify-center mb-4">
                         <a href="#image-full" class="image-detail ">
                             <img id="foto"
-                                src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('images/profile_default.png') }}"
+                                src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile_default.png') }}"
                                 alt="Profile Picture" class="rounded-full w-24 h-24 shadow-lg">
                         </a>
                         {{-- Image full --}}
@@ -178,100 +177,31 @@
                                     {{ $user->kontrak->nama }}</div>
                             </div>
                         </div>
-=======
-        
-    <div class="h-screen">
-        <div class="flex items-center justify-center min-h-auto">
-            <div class="bg-white shadow-lg rounded-lg w-full  max-w-md p-6 shadow shadow-black">
-                <div class="text-center mb-6">
-                    <h2 class="text-2xl font-bold text-gray-700">Profil Karyawan</h2>
-                    <p class="text-sm text-gray-500">Detail Informasi Anda</p>
-                </div>
-                <!-- Profil picture -->
-                <div class="flex justify-center mb-4">
-                    <img src="{{ Vite::asset('public/images/logo3.png') }}" alt="Profile Picture"
-                        class="rounded-full w-24 h-24 shadow-lg">
-                </div>
-                <!-- Basic Profile Information -->
-                <div class="text-center space-y-2">
-                    <div class="text-xl font-semibold text-gray-800">{{ auth()->user()->nama }}</div>
-                </div>
-                <!-- Toggle Button for Details -->
-                <div class="mt-6 flex justify-center">
-                    <button onclick="toggleDetails()"
-                        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">
-                        Tampilkan Detail
-                    </button>
-                </div>
-                <!-- Profil Informasi -->
-                <div id="detail-info" class="hidden mt-6 grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Email</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->Email }}</div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Gender</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->Gender }}</div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Agama</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->Agama }}</div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Tempat Lahir</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->tempat_lahir }}</div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Tanggal Lahir</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->tanggal_lahir }}</div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Alamat</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->alamat }}</div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Nomor Handphone</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->no_hp }}</div>
-                    </div>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-600">Jabatan</label>
-                        <div class="bg-gray-100 px-4 py-2 rounded text-gray-700">{{ auth()->user()->jabatan_id }}</div>
->>>>>>> e43604c72e4df458aa116308bd351e7e8ebb5382
-                    </div>
-                </div>
-            </div>
-        </div>
-<<<<<<< HEAD
-    @endauth
-=======
-    </div>
-    @endauth
+                    @endauth
+                    <script>
+                        const imageDetail = document.querySelector('.image-detail');
+                        const imageBig = document.querySelector('.image-big');
+                        imageDetail.addEventListener('click', () => {
+                            imageBig.classList.toggle('hidden');
+                        })
 
->>>>>>> e43604c72e4df458aa116308bd351e7e8ebb5382
-    <script>
-        const imageDetail = document.querySelector('.image-detail');
-        const imageBig = document.querySelector('.image-big');
-        imageDetail.addEventListener('click', () => {
-            imageBig.classList.toggle('hidden');
-        })
+                        function toggleDetails() {
+                            const details = document.getElementById('detail-info');
+                            details.classList.toggle('hidden');
+                        }
 
-        function toggleDetails() {
-            const details = document.getElementById('detail-info');
-            details.classList.toggle('hidden');
-        }
-
-        function toggleEdit() {
-            const edit = document.getElementById('edit');
-            edit.classList.toggle('hidden');
-        }
-        // Function to preview image
-        function previewImage(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const imagePreview = document.getElementById('imagePreview');
-                imagePreview.innerHTML = `<img src="${reader.result}" alt="Preview" class="w-full aspect-square">`;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        }
-    </script>
+                        function toggleEdit() {
+                            const edit = document.getElementById('edit');
+                            edit.classList.toggle('hidden');
+                        }
+                        // Function to preview image
+                        function previewImage(event) {
+                            const reader = new FileReader();
+                            reader.onload = function() {
+                                const imagePreview = document.getElementById('imagePreview');
+                                imagePreview.innerHTML = `<img src="${reader.result}" alt="Preview" class="w-full aspect-square">`;
+                            };
+                            reader.readAsDataURL(event.target.files[0]);
+                        }
+                    </script>
 </x-layout>

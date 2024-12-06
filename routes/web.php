@@ -22,7 +22,7 @@ Route::get('/data_karyawan/{id}/delete', [UserController::class, 'deleteDataKary
 
 
 // Profile start
-Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil')->middleware('auth');
+Route::get('/profile', [UserController::class, 'index'])->name('profil');
 Route::patch('/profile', [UserController::class, 'updateprofile'])->name('fitur-update-profile')->middleware('auth');
 // Profile end
 

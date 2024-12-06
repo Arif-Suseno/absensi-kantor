@@ -15,6 +15,7 @@
         </div>
     </section>
 
+
     {{-- Right Section --}}
     <section class="flex items-center gap-4 justify-end">
         {{-- Link Logout --}}
@@ -24,10 +25,11 @@
         </a>
         {{-- Profile --}}
         @auth
-
-            <img src="{{ auth()->user()->image === null ? asset('images/profile_default.png') : auth()->user()->image }}"
-                alt="profile"
-                class="w-10 h-10 object-cover rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+            <a href="{{ route('profil') }}">
+                <img src="{{ auth()->user()->image ? asset('storage/' . auth()->user()->image) : asset('images/profile_default.png') }}"
+                    alt="profile"
+                    class="w-10 h-10 object-cover rounded-full shadow-md hover:shadow-lg transition-shadow duration-300 ease-in-out">
+            </a>
         @endauth
     </section>
 </header>
