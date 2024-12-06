@@ -11,6 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>{{ $title }}</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="{{ Vite::asset('public/images/logo.jpg') }}" type="image/x-icon">
 </head>
 
 <body class="min-h-screen bg-gradient-to-r from-blue-900 to-gray-500 text-gray-800">

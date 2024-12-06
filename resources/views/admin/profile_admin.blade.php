@@ -32,7 +32,7 @@
                 </div>
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">Gender:</span>
-                    <span class="text-gray-900">{{ auth()->user()->gender == 'L' ? 'Laki-laki' : 'Perempuan' }}</span>
+                    <span class="text-gray-900">{{ auth()->user()->gender }}</span>
                 </div>
                 <div class="flex justify-between">
                     <span class="font-semibold text-gray-700">Agama:</span>
