@@ -60,8 +60,8 @@ Route::get('/pengajuan_izincuti', function () {
 });
 
 
-Route::get('pengajuan_cutiizin', [CutiIzinController::class, 'create'])->name('karyawan.pengajuan_cutiizin');
-Route::post('pengajuan_cutiizin', [CutiIzinController::class, 'store'])->name('pengajuan_cutiizin.store');
+Route::get('/pengajuan_cutiizin', [CutiIzinController::class, 'create'])->name('karyawan.pengajuan_cutiizin');
+Route::post('/pengajuan_cutiizin', [CutiIzinController::class, 'store'])->name('pengajuan_cutiizin.create');
 
 // Route::get('/admin/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
 
@@ -77,7 +77,6 @@ Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.pr
 
 Route::get('/persetujuan_izin&cuti', [CutiIzinController::class, 'persetujuanIzinIndex'])->name('admin.persetujuan_izin&cuti');
 Route::patch('/persetujuan_izin&cuti/{id}', [CutiIzinController::class, 'persetujuanIzinUpdate'])->name('admin.persetujuan.izin');
-
 
 // Login start
 Route::get('/login',[AuthController::class, 'login'])->name('login');
