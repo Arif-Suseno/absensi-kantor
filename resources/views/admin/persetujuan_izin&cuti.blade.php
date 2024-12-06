@@ -19,7 +19,7 @@
                     @foreach($pengajuan as $index => $izin)
                     <tr class="{{ $loop->odd ? 'bg-gray-50' : 'bg-white' }}">
                         <td class="px-6 py-4 text-sm text-gray-600 border-b">{{ $index + 1 }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600 border-b">{{ $izin->user->name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600 border-b">{{ $izin->user->nama }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600 border-b">{{ $izin->created_at->format('d-m-Y') }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600 border-b">{{ $izin->jenis }}</td>
                         <td class="px-6 py-4 text-sm text-gray-600 border-b">{{ $izin->alasan }}</td>
