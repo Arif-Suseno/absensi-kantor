@@ -1,16 +1,12 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
-// use App\Http\Controllers\UserController;
-// use App\Http\Controllers\CutiIzinController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CutiIzinController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 // Route::get('/dashboard_admin', function () {
 //     return view('admin.dashboard_admin', ["title"=> "Dashboard"]);
@@ -19,8 +15,6 @@ Route::get('/', function () {
 //     return view('admin.data_karyawan', ["title"=> "Data Karyawan"]);
 // });
 
-Route::get('/data_karyawan',[UserController::class,'show'])->name('data_karyawan');
-    
 
 // Data Karyawan start
 Route::get('/data_karyawan',[UserController::class,'indexDataKaryawan'])->name('Data Karyawan')->middleware('auth');
@@ -36,22 +30,25 @@ Route::get('/data_karyawan/{id}/delete', [UserController::class, 'deleteDataKary
 Route::get('/absensi',  function (){
     return view('karyawan.absensi', ["title" => "Absensi"]);
 });
-Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.absensi');
-Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit');
+Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.absensi')->middleware('auth');
+Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit')->middleware('auth');
 
-Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil');
+// Profile start
+Route::get('/profile', [UserController::class, 'index'])->name('karyawan.profil')->middleware('auth');
+Route::patch('/profile', [UserController::class, 'updateprofile'])->name('fitur-update-profile')->middleware('auth');
+// Profile end
 
 // Route::get('/admin/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
 
-Route::get('/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard');
+Route::get('/dashboard', [Controller::class, 'showDashboard'])->name('admin.dashboard')->middleware('auth');
 
 Route::resource('users', UserController::class);
 
-Route::get('/manajemen_absensi', [AbsensiController::class, 'index_manajemen'])->name('admin.manajemen_absensi');
+Route::get('/manajemen_absensi', [AbsensiController::class, 'index_manajemen'])->name('admin.manajemen_absensi')->middleware('auth');
 
-Route::resource('manajemen', AbsensiController::class);
+Route::resource('manajemen', AbsensiController::class)->middleware('auth');
 
-Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.profile_admin');
+Route::get('/profile_admin', [UserController::class, 'profile'])->name('admin.profile_admin')->middleware('auth');
 
 // Login start
 Route::get('/login',[AuthController::class, 'login'])->name('login');

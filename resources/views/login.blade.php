@@ -19,7 +19,7 @@
         <h1 class="text-2xl font-bold text-center mb-6 md:text-4xl">Login</h1>
         <div class="mb-4">
             <label for="email">Email :</label>
-            <input type="email" name="email" id="email" value="{{ old('email') }}" autocomplete="off"
+            <input type="email" name="email" id="email" value="{{ old('email') }}"
                 class="w-full mt-1 p-2 bg-gray-600 border-2 border-gray-400 bg-opacity-10 rounded text-white focus:outline-none focus:ring-2 focus:ring-gray-600 focus:shadow focus:shadow-gray-400 md:p-3"
                 placeholder="Email" />
             @error('email')
