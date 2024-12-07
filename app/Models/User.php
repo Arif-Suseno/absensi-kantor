@@ -78,8 +78,5 @@ class User extends Authenticatable
         return $this->hasMany(Absensi::class);
     }
 
-public function cutiIzin()
-{
-    return $this->hasMany(CutiIzin::class);
-}
+
 }

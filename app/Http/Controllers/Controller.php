@@ -9,6 +9,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Absensi;
+use App\Models\IzinCuti;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -35,21 +37,38 @@ class Controller
         return view('admin.dashboard_admin', compact('karyawan', 'cutiLogs', 'absensiLogs'))->with('title', 'Dashboard Admin');
     }
 
+
     public function dashboard()
     {
-        $title = 'Dashboard';
         $userId = auth()->user()->id;
+
+        // Data absensi
+        $totalHadir = Absensi::where('user_id', $userId)
+            ->where('status', 'Hadir')->count();
+        $totalIzin = IzinCuti::where('user_id', $userId)
+            ->whereIn('jenis', ['Izin', 'Cuti'])
+            ->where('status', 'Disetujui')->count();
+        $totalTidakHadir = \App\Models\Absensi::where('user_id', $userId)
+            ->where('status', 'Alpa')->count();
 
         $absensiTerbaru = \App\Models\Absensi::where('user_id', $userId)
             ->orderBy('tanggal', 'desc')
-            ->take(5)
-            ->with('user')
+            ->take(7)
             ->get();
 
-        $totalHadir = \App\Models\Absensi::where('user_id', $userId)->where('status', 'Hadir')->count();
-        $totalIzin = \App\Models\IzinCuti::where('user_id', $userId)->whereIn('jenis', ['Izin', 'Cuti'])->count();
-        $totalTidakHadir = \App\Models\Absensi::where('user_id', $userId)->where('status', 'Alpa')->count();
+        // Pengajuan izin/cuti belum disetujui
+        $pengajuanPending = \App\Models\IzinCuti::where('user_id', $userId)
+            ->where('status', 'Diajukan') // Status 'Pending' berarti belum disetujui
+            ->orderBy('created_at', 'desc')
+            ->get();
 
-        return view('karyawan.dashboard', compact('absensiTerbaru', 'totalHadir', 'totalIzin', 'totalTidakHadir','title'));
+        return view('karyawan.dashboard', [
+            'title' => 'Dashboard Karyawan',
+            'totalHadir' => $totalHadir,
+            'totalIzin' => $totalIzin,
+            'totalTidakHadir' => $totalTidakHadir,
+            'absensiTerbaru' => $absensiTerbaru,
+            'pengajuanPending' => $pengajuanPending,
+        ]);
     }
 }
