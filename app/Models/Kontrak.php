@@ -20,7 +20,6 @@ class Kontrak extends Model
         'created_at',
         'updated_at'
         ];
-
     /**
      * Accessor: Format tanggal_mulai (opsional).
      */

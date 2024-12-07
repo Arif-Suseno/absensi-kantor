@@ -7,19 +7,12 @@ use App\Models\User;
 use App\Models\Jabatan;
 use App\Models\Kontrak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Session\Session;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $user = User::first();
-        return view('karyawan.profile', [
-            'title' => 'Profil Karyawan',
-            'user' => $user,
-        ]);
-    }
     // Data karyawan start
     // Menampilkan tabel data karyawan
     public function indexDataKaryawan(Request $request, User $user)
@@ -86,10 +79,6 @@ class UserController extends Controller
         'password' => 'required|string|min:6',
         'jam_kerja' => 'nullable|string'
     ],[
-        // Pesan jabatan
-        'jabatan_id.required' => 'Jabatan wajib diisi!!',
-        // Pesan kontrak
-        'kontrak_id.required' => 'Kontrak wajib diisi!!',
         // Pesan nama
         'nama.required' => 'Nama wajib diisi!!',
         'nama.min' => 'Nama harus memiliki minimal :min karakter!',
@@ -101,15 +90,13 @@ class UserController extends Controller
         'password.required' => 'Password wajib diisi!',
         'password.min' => 'Password harus memiliki minimal :min karakter!',
 
-        'jam_kerja.required' => 'Jam kerja wajib diisi!',
-
     ]);
     $validateData['password'] = bcrypt($validateData['password']);
     // Simpan data
     User::create($validateData);
     // Redirect setelah data berhasil disimpan
     return redirect()->route('Data Karyawan')->with('success', 'Data berhasil ditambahkan!');
-    }
+}
 
     // Menampilan form edit karyawan berdasarkan id
     public function showEditKaryawan($id, User $user, Kontrak $kontrak, Jabatan $jabatan){
@@ -124,7 +111,7 @@ class UserController extends Controller
 
     // Mengedit Data Karyawan
     public function updateDataKaryawan(Request $request, $id){
-    
+        
          // Validasi data, termasuk file
     $validatedData = $request->validate([
         'role' => 'required|string',
@@ -141,8 +128,26 @@ class UserController extends Controller
         'alamat' => 'nullable|string',
         'jam_kerja' => 'string',
         'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Validasi file
+    ],[
+         // Pesan nama
+         'nama.min' => 'Nama minimal :min karakter',
+         'nama.max' => 'Nama maksimal :max karakter',
+        // Pesan email
+        'email.required' => 'Email wajib diisi!',
+        'email.email' => 'Format email tidak valid!',
+        'email.unique' => 'Email tersebut sudah terdaftar!',
+        // Pesan password
+        'password.required' => 'Password wajib diisi!',
+        'password.min' => 'Password harus memiliki minimal :min karakter!',
+         // Pesan no_hp
+         'no_hp.min' => 'No minimal :min karakter',
+         'no_hp.max' => 'No maksimal :max karakter',
+         // Pesan image
+         'image.image' => 'File harus berupa gambar.',
+         'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau gif.',
+         'image.max' => 'Ukuran gambar maksimal 2 MB.',
     ]);
-
+    
     // Temukan data user
     $user = User::findOrFail($id);
 
@@ -163,8 +168,8 @@ class UserController extends Controller
         // Jika tidak ada file baru, tetap gunakan yang lama
         $validatedData['image'] = $user->image;
     }
-
-       // Enkripsi password jika ada input baru
+    
+    // Enkripsi password jika ada input baru
        if (!empty($validatedData['password'])) {
         $validatedData['password'] = bcrypt($validatedData['password']);
     } else {
@@ -178,23 +183,73 @@ class UserController extends Controller
     }else{
         return redirect()->back()->withErrors('Data gagal dupdate');
     }
-    }
+}
 
-    // Menghapus data karyawan
+// Menghapus data karyawan
     public function deleteDataKaryawan($id){
-        User::findOrFail($id)->delete();
+    User::findOrFail($id)->delete();
         return redirect()->back()->with('success', 'Data berhasil dihapus!');
     }
     // Data karyawan end
-    
-    public function profile()
+    // Profile karyawan start
+    public function index()
     {
-        // Ambil data user pertama (atau user lain sesuai kebutuhan)
-        $user = User::first(); // atau bisa menggunakan User::find(1) jika ingin ambil user dengan ID tertentu
-
-        // Kirim data ke view
-        return view('admin.profile_admin', ["title" => "Profile Admin"],compact('user'));
+        $user = Auth::user(); 
+        $user->load(['jabatan', 'kontrak']);
+        return view('profile', [
+            'title' => 'Profil',
+            'user' => $user,
+        ]);
     }
+    
+    public function updateprofile(Request $request)
+    {   
+          // Validasi input
+        $validatedData = $request->validate([
+            'nama' => 'required|string|min:3|max:255',
+            'gender' => 'nullable|string|in:Laki-laki,Perempuan',
+            'agama' => 'nullable|string',
+            'tanggal_lahir' => 'nullable|date',
+            'tempat_lahir' => 'nullable|string',
+            'no_hp' => 'nullable|string|min:10|max:15',
+            'alamat' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ],[
+            // Pesan nama
+            'nama.min' => 'Nama minimal :min karakter',
+            'nama.max' => 'Nama maksimal :max karakter',
+            // Pesan no_hp
+            'no_hp.min' => 'Nomor minimal :min karakter',
+            'no_hp.max' => 'Nomor maksimal :max karakter',
+            // Pesan image
+            'image.image' => 'File harus berupa gambar.',
+            'image.mimes' => 'Format gambar harus jpeg, png, jpg, atau gif.',
+            'image.max' => 'Ukuran gambar maksimal 2 MB.',
+            ]);
+
+        $user = Auth::user();
+
+        if ($request->hasFile('image')) {
+            // Simpan file di storage dan dapatkan path-nya
+            $filePath = $request->file('image')->store('images', 'public');
+            
+            // Hapus gambar lama jika ada
+            if (!empty($user->image)) {
+                Storage::disk('public')->delete($user->image);
+            }
+            
+            $validatedData['image'] = $filePath;
+        }else{
+            $validatedData['image'] = $user->image;
+        }
+        $update = $user->update($validatedData);
+        if ($update) {
+            return redirect()->back()->with('message', 'Data berhasil diperbarui!');
+        } else {
+                return redirect()->back()->withErrors('message', 'Data gagal diperbarui. Silakan coba lagi!');
+            }
+    }
+    
 
     public function show(){
         $users = User::all();
