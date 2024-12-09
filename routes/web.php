@@ -52,6 +52,8 @@ Route::get('/pengajuan_cutiizin', [CutiIzinController::class, 'create'])->name('
 Route::post('/pengajuan_cutiizin', [CutiIzinController::class, 'store'])->name('pengajuan_cutiizin.create');
 
 Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin')->middleware('auth')->middleware('auth');
+Route::get('/dashboard_admin', [JabatanController::class, 'dashboard_admin'])->name('admin.dashboard_admin');
+
 
 Route::get('/dashboard', [Controller::class, 'dashboard'])->name('karyawan.dashboard');
 

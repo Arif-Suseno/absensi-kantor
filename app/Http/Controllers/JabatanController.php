@@ -61,5 +61,16 @@ class JabatanController extends Controller
         $jabatan->delete();
         return redirect()->route('admin.jabatan')->with('success', 'Jabatan berhasil dihapus');
     }
+    public function dashboard_admin()
+{
+    // Ambil 5 data karyawan terbaru
+    $karyawan = \App\Models\User::latest()->take(5)->get();
+    
+    // Ambil maksimal 3 data jabatan
+    $jabatans = Jabatan::latest()->take(3)->get();
+    
+    $title = 'Dashboard Admin'; // Judul halaman
+    return view('admin.dashboard_admin', compact('karyawan', 'jabatans', 'title'));
+}
 }
 

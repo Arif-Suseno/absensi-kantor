@@ -1,91 +1,48 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
 
-    <!-- Main Container -->
-    <div class="container mx-auto p-6 flex justify-center">
-        <div class="w-full md:w-3/4 lg:w-2/3 xl:w-1/2">
+    <div class="container mx-auto p-6">
+        <!-- Header -->
+        <h2 class="text-3xl font-bold text-neutral-200 mb-6">Dashboard Admin</h2>
 
-            <!-- Header -->
-            <header class="mb-6 text-center">
-                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-gray-600 via-white to-black shadow-md p-4">
-                    Dashboard Admin
-                </h2>
-            </header>
-
-            <!-- Card untuk Menampilkan Jumlah Karyawan -->
-            <div class="bg-gradient-to-r from-teal-500 to-teal-400 shadow-lg rounded-lg p-6 mb-5">
-                <h3 class="text-xl font-semibold text-white mb-4 text-center">Data Karyawan</h3>
-                <table class="w-full text-left table-auto bg-white rounded-lg shadow-md overflow-hidden">
-                    <thead>
-                        <tr>
-                            <th class="px-6 py-3 font-semibold text-gray-700 bg-gray-200">Nama</th>
-                            <th class="px-6 py-3 font-semibold text-gray-700 bg-gray-200">Alamat</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($karyawan as $data)
-                            <tr>
-                                <td class="border px-6 py-4">{{ $data->nama }}</td>
-                                <td class="border px-6 py-4">{{ $data->alamat }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <!-- Daftar Jabatan -->
+            <div class="bg-blue-800 text-white rounded-lg shadow-md p-4">
+                <h2 class="text-blue-400 text-center font-semibold mb-4 bg-black rounded-lg shadow-md">Daftar Jabatan</h2>
+                @foreach ($jabatans as $jabatan)
+                <ul>
+                    <li class="border-b border-white py-2">{{ $jabatan->nama_jabatan }}</li>
+                    <li class="border-b border-white py-2">{{ $jabatan->deskripsi }}</li>
+                </ul>
+                @endforeach
             </div>
-
-            <!-- Data Izin/Cuti Terbaru -->
-            <div class="bg-gradient-to-r from-blue-500 to-blue-400 shadow-lg rounded-lg p-6 mb-6">
-                <h3 class="text-xl font-semibold text-white mb-4 text-center">Data Izin/Cuti Terbaru</h3>
-                <table class="w-full text-left table-auto bg-white rounded-lg shadow-md overflow-hidden">
-                    <thead>
-                        <tr>
-                            <th class="px-6 py-3 font-semibold text-gray-700 bg-gray-200">Nama Karyawan</th>
-                            <th class="px-6 py-3 font-semibold text-gray-700 bg-gray-200">Tanggal Izin/Cuti</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($cutiLogs as $log)
-                            <tr>
-                                <td class="border px-6 py-4">{{ $log->nama }}</td>
-                                <td class="border px-6 py-4">{{ $log->tanggal_mulai }} - {{ $log->tanggal_selesai }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Log Aktivitas -->
-            {{-- <div class="bg-gradient-to-r from-yellow-500 to-yellow-400 shadow-lg rounded-lg p-6">
-                <h3 class="text-xl font-semibold text-white mb-4 text-center">Log Aktivitas</h3>
-                <table class="w-full text-left table-auto bg-white rounded-lg shadow-md overflow-hidden" style="table-layout: fixed;">
-                    <thead>
-                        <tr>
-                            <th class="px-6 py-3 font-semibold text-gray-700 bg-gray-200 w-1/2">Waktu</th>
-                            <th class="px-6 py-3 font-semibold text-gray-700 bg-gray-200 w-1/2">Aktivitas</th>
-                        </tr>
-                    </thead>
-                
             
-            
-
-
-
-
-
-
-
-
-                    <tbody>
-                        @foreach ($absensiLogs as $log)
-                            <tr>
-                                <td class="border px-6 py-4">{{ $log->tanggal }}</td>
-                                <td class="border px-6 py-4">{{ $log->status }}</td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+            <!-- V-Legal (Data Karyawan) -->
+            <div class="bg-teal-700 shadow rounded-lg p-4 col-span-2">
+                <h3 class="text-lg font-bold text-teal-500 text-center mb-4 bg-black rounded-lg shadow-md">Data Karyawan</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    @foreach ($karyawan as $data)
+                        <div class="bg-yellow-100 p-4 rounded-lg">
+                            <h4 class="font-bold text-gray-800">{{ $data->nama }}</h4>
+                            <p class="text-gray-600 text-sm">{{ $data->alamat }}</p>
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
-        </div> --}}
+            <!-- Monitoring Blanko -->
+            <div class="bg-rose-700 text-white rounded-lg p-4 col-span-1">
+                <h3 class="text-lg font-bold">Kontrak</h3>
+                <div class="bg-black text-white p-3 mt-4 rounded-lg">
+                    <p class="text-base font-bold">Jenis Kontrak:</p>
+                    <ul class="text-base font-bold list-disc list-inside mt-2">
+                        <li>Kontrak Sementara</li>
+                        <li>Kontrak Magang</li>
+                        <li>Permanen</li>
+                    </ul>
+                    <a href="{{ route('kontrak.index') }}" class="bg-blue-700 text-white px-4 py-2 mt-4 rounded block text-center">Lihat Detail</a>
+                </div>
+            </div>
+        </div>
     </div>
 </x-layout>
