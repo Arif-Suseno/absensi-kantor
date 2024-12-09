@@ -8,7 +8,7 @@
             </div>
         @endif
         <div class="flex justify-between items-center mb-4">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6">Riwayat Absensi</h1>
+            <h1 class="text-3xl font-bold text-slate-200 mb-6">Riwayat Absensi</h1>
             
             <a href="{{ route('karyawan.dashboard') }}"
                 class="flex items-center py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">

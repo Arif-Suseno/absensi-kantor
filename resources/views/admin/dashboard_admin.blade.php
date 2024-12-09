@@ -7,7 +7,7 @@
 
         <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
             <!-- Daftar Jabatan -->
-            <div class="bg-blue-800 text-white rounded-lg shadow-md p-4">
+            <div class="bg-blue-600 text-white rounded-lg shadow-md p-4">
                 <h2 class="text-blue-400 text-center font-semibold mb-4 bg-black rounded-lg shadow-md">Daftar Jabatan</h2>
                 @foreach ($jabatans as $jabatan)
                 <ul>
@@ -18,7 +18,7 @@
             </div>
             
             <!-- V-Legal (Data Karyawan) -->
-            <div class="bg-teal-700 shadow rounded-lg p-4 col-span-2">
+            <div class="bg-teal-600 shadow rounded-lg p-4 col-span-2">
                 <h3 class="text-lg font-bold text-teal-500 text-center mb-4 bg-black rounded-lg shadow-md">Data Karyawan</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     @foreach ($karyawan as $data)
@@ -31,7 +31,7 @@
             </div>
 
             <!-- Monitoring Blanko -->
-            <div class="bg-rose-700 text-white rounded-lg p-4 col-span-1">
+            <div class="bg-rose-600 text-white rounded-lg p-4 col-span-1">
                 <h3 class="text-lg font-bold">Kontrak</h3>
                 <div class="bg-black text-white p-3 mt-4 rounded-lg">
                     <p class="text-base font-bold">Jenis Kontrak:</p>

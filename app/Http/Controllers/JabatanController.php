@@ -64,7 +64,7 @@ class JabatanController extends Controller
     public function dashboard_admin()
 {
     // Ambil 5 data karyawan terbaru
-    $karyawan = \App\Models\User::latest()->take(5)->get();
+    $karyawan = \App\Models\User::latest()->take(6)->get();
     
     // Ambil maksimal 3 data jabatan
     $jabatans = Jabatan::latest()->take(3)->get();

@@ -1,6 +1,8 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
 
+    <br>
+    <br>
     <div class="flex-1 flex items-center justify-center ">
         <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg shadow shadow-black">
             <h1 class="text-2xl font-bold mb-6 text-center">Formulir Absensi</h1>

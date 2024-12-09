@@ -4,12 +4,18 @@
         <div class="flex justify-between items-center mb-4">
             <h1 class="text-2xl font-bold text-gray-800">Dashboard Karyawan</h1>
 
-            <!-- Tombol Pengingat Absensi -->
-            <a href="{{ route('karyawan.absensi') }}"
-                class="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                Pengingat Absensi
-            </a>
+            <div class="flex flex-col items-end">
+                <!-- Tulisan "Belum Absen??" -->
+                <p class="text-gray-700 font-medium mb-1">Belum Absen??</p>
+
+                <!-- Tombol Pengingat Absensi -->
+                <a href="{{ route('karyawan.absensi') }}"
+                    class="py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    Absen Sekarang
+                </a>
+            </div>
         </div>
+
         <p class="text-slate-950 text-2xl">Selamat datang, {{ Auth::user()->nama }}!</p>
 
         <!-- Ringkasan Absensi -->
