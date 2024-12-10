@@ -9,7 +9,7 @@
         </h1>
 
         <!-- Pesan sukses jika ada -->
-        @if(session('success'))
+        @if (session('success'))
             <div class="bg-green-100 text-green-700 p-4 rounded-md mb-4">
                 {{ session('success') }}
             </div>
@@ -17,7 +17,7 @@
 
         <!-- Tombol Tambah Jabatan -->
         <div class="mb-6 flex justify-center sm:justify-start">
-            <a href="{{ url('/admin/create_jabatan') }}" 
+            <a href="{{ route('jabatan.create') }}"
                 class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md shadow">
                 Tambah Jabatan
             </a>
@@ -40,7 +40,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($jabatans as $jabatan)
+                    @foreach ($jabatans as $jabatan)
                         <tr class="hover:bg-gray-50">
                             <td class="px-4 sm:px-6 py-4 text-gray-800 border-b">
                                 {{ $jabatan->nama_jabatan }}
@@ -50,15 +50,15 @@
                             </td>
                             <td class="px-4 sm:px-6 py-4 text-center border-b">
                                 <div class="flex flex-col sm:flex-row sm:justify-center gap-2">
-                                    <a href="{{ route('jabatan.edit', $jabatan->id) }}" 
-                                       class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md shadow">
+                                    <a href="{{ route('jabatan.edit', $jabatan->id) }}"
+                                        class="bg-yellow-400 hover:bg-yellow-500 text-white px-4 py-2 rounded-md shadow">
                                         Edit
                                     </a>
                                     <form action="{{ route('jabatan.destroy', $jabatan->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" 
-                                                class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow">
+                                        <button type="submit"
+                                            class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md shadow">
                                             Hapus
                                         </button>
                                     </form>

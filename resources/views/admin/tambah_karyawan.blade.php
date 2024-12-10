@@ -1,6 +1,6 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <form method="post"
+    <form method="POST" action="{{ route('data_karyawan.store') }}"
         class="relative w-full mx-auto mb-8 mt-4 p-2  bg-sky-300 border-2 border-sky-600 shadow-lg shadow-sky-700 rounded-lg md:w-6/12 lg:w-5/12">
         @csrf
         <a href="{{ url('/data_karyawan') }}"

@@ -8,8 +8,10 @@
             <!-- Jenis Kontrak -->
             <div>
                 <label for="nama" class="block text-sm font-medium text-gray-700">Jenis Kontrak</label>
-                <select name="nama" id="nama" class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" required>
-                    <option disabled>-- Pilih Jenis --</option>
+                <select name="nama" id="nama"
+                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    required>
+                    <option disabled selected>-- Pilih Jenis --</option>
                     <option value="Permanen">Permanen</option>
                     <option value="Sementara">Sementara</option>
                     <option value="Magang">Magang</option>
@@ -18,33 +20,43 @@
 
             <!-- Durasi Kontrak -->
             <div>
-                <label for="durasi_kontrak" class="block text-sm font-medium text-gray-700">Durasi Kontrak (Bulan)</label>
-                <input type="number" name="durasi_kontrak" value="{{old('durasi_kontraka')}}" id="durasi_kontrak" class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="Contoh: 12">
+                <label for="durasi_kontrak" class="block text-sm font-medium text-gray-700">Durasi Kontrak
+                    (Bulan)</label>
+                <input type="number" name="durasi_kontrak" value="{{ old('durasi_kontraka') }}" id="durasi_kontrak"
+                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    placeholder="Contoh: 12">
             </div>
 
             <!-- Tanggal Mulai -->
             <div>
                 <label for="tanggal_mulai" class="block text-sm font-medium text-gray-700">Tanggal Mulai</label>
-                <input type="date" name="tanggal_mulai" id="tanggal_mulai" value="{{old('tanggal_mulai')}}" class="mt-1 block p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" required>
+                <input type="date" name="tanggal_mulai" id="tanggal_mulai" value="{{ old('tanggal_mulai') }}"
+                    class="mt-1 block p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    required>
             </div>
 
             <!-- Tanggal Selesai -->
             <div>
                 <label for="tanggal_selesai" class="block text-sm font-medium text-gray-700">Tanggal Selesai</label>
-                <input type="date" name="tanggal_selesai" id="tanggal_selesai" value="{{old('tanggal_selesai')}}" class="mt-1 block p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
+                <input type="date" name="tanggal_selesai" id="tanggal_selesai" value="{{ old('tanggal_selesai') }}"
+                    class="mt-1 block p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm">
             </div>
 
             <!-- Deskripsi -->
             <div>
                 <label for="deskripsi" class="block text-sm font-medium text-gray-700">Deskripsi</label>
-                <textarea name="deskripsi" id="deskripsi" value="{{old('deskripsi')}}" class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" rows="4" placeholder="Tambahkan deskripsi kontrak (opsional)"></textarea>
+                <textarea name="deskripsi" id="deskripsi" value="{{ old('deskripsi') }}"
+                    class="mt-1 block w-full p-2 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"
+                    rows="4" placeholder="Tambahkan deskripsi kontrak (opsional)"></textarea>
             </div>
 
             <!-- Tombol Aksi -->
             <div class="flex justify-end space-x-3">
-                <button type="submit" class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md shadow">Simpan</button>
-                <a href="{{ route('kontrak.index') }}" class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow">Kembali</a>
+                <button type="submit"
+                    class="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-md shadow">Simpan</button>
+                <a href="{{ route('kontrak.index') }}"
+                    class="bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded-md shadow">Kembali</a>
             </div>
-        </form> 
+        </form>
     </div>
 </x-layout>

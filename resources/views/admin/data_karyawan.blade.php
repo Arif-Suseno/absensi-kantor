@@ -4,7 +4,7 @@
     <div class="h-screen">
         {{-- Link ke tambah karyawan --}}
         <div class="flex justify-between items-center my-4 md:mb-6">
-            <a href="{{ route('Tambah Karyawan') }}"
+            <a href="{{ route('data_karyawan.create') }}"
                 class="p-1 bg-green-400 border-2 border-green-950 rounded-md font-medium text-xs shadow-md shadow-green-700 hover:bg-green-500 md:text-base lg:p-2">Tambah
                 Karyawan</a>
         </div>
@@ -68,17 +68,23 @@
                                 {{ $user->jabatan->nama_jabatan }}
                             </td>
                             <td class="border-b border-slate-400 bg-orange-200 p-2 text-center md:p-1 lg:p-2">
-                                <a href="{{ url('data_karyawan/' . $user->id . '/detail') }}"
+                                <a href="{{ route('data_karyawan.show', $user->id) }}"
                                     class="p-1 bg-cyan-400 border border-cyan-500 rounded-md text-white shadow shadow-cyan-600  hover:bg-cyan-600">Detail</a>
                             </td>
                             <td
                                 class="hidden border-b border-slate-400 bg-orange-200 p-2 text-center md:p-1 lg:p-2 md:table-cell">
-                                <a href="{{ url('data_karyawan/' . $user->id . '/edit') }}"
+                                <a href="{{ route('data_karyawan.edit', $user->id) }}"
                                     class="p-1 bg-blue-400 border border-blue-600 rounded-md text-white shadow shadow-blue-600 hover:bg-blue-500 hover:shadow-blue-600">Edit</a>
                             </td>
                             <td class="border-b border-slate-400 bg-orange-200 p-2 text-center md:p-1 lg:p-2">
-                                <a href="{{ url('data_karyawan/' . $user->id . '/delete') }}"
-                                    class="p-1 bg-red-400 border border-red-500 rounded-md  text-white shadow shadow-red-600 hover:bg-red-600 ">Hapus</a>
+                                <form action="{{ route('data_karyawan.destroy', $user->id) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button
+                                        class="p-1 bg-red-400 border border-red-500 rounded-md  text-white shadow shadow-red-600 hover:bg-red-600">Hapus</button>
+                                </form>
+                                {{-- <a href="{{ route('data_karyawan.destroy', $user->id) }}"
+                                    class="p-1 bg-red-400 border border-red-500 rounded-md  text-white shadow shadow-red-600 hover:bg-red-600 ">Hapus</a> --}}
                             </td>
                             </td>
                         </tr>

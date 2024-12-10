@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class JabatanController extends Controller
 {
-    public function index()
+    public function index(Jabatan $jabatan)
     {
-        $jabatans = Jabatan::all();
+        $jabatans = $jabatan->orderBy('id', 'DESC')->get();
         $title = 'Daftar Jabatan'; // Judul halaman
         return view('admin.jabatan', compact('jabatans', 'title'));
     }
@@ -22,44 +22,40 @@ class JabatanController extends Controller
     }
 
     // Menyimpan jabatan baru
-    public function store(Request $request)
+    public function store(Request $request, Jabatan $jabatan)
     {
-        $request->validate([
+        $dataValidate = $request->validate([
             'nama_jabatan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
 
-        Jabatan::create($request->all());
-        return redirect()->route('admin.jabatan')->with('success', 'Jabatan berhasil ditambahkan');
+        $jabatan->create($dataValidate);
+        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil ditambahkan');
     }
 
     // Menampilkan form untuk mengedit jabatan
-    public function edit($id)
+    public function edit( Jabatan $jabatan)
     {
-        $jabatan = Jabatan::findOrFail($id);
-        $title = 'Edit Jabatan';
-        return view('admin.edit_jabatan', compact('jabatan', 'title'));
+        return view('admin.edit_jabatan', ['jabatan' => $jabatan, 'title' => 'Edit Jabatan']);
     }
 
     // Memperbarui jabatan
-    public function update(Request $request, $id)
+    public function update(Request $request, Jabatan $jabatan)
     {
-        $request->validate([
+        $dataValidate = $request->validate([
             'nama_jabatan' => 'required|string|max:255',
             'deskripsi' => 'nullable|string',
         ]);
 
-        $jabatan = Jabatan::findOrFail($id);
-        $jabatan->update($request->all());
-        return redirect()->route('admin.jabatan')->with('success', 'Jabatan berhasil diperbarui');
+        $jabatan->update($dataValidate);
+        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil diperbarui');
     }
 
     // Menghapus jabatan
-    public function destroy($id)
+    public function destroy(Jabatan $jabatan)
     {
-        $jabatan = Jabatan::findOrFail($id);
         $jabatan->delete();
-        return redirect()->route('admin.jabatan')->with('success', 'Jabatan berhasil dihapus');
+        return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil dihapus');
     }
 }
 

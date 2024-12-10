@@ -8,11 +8,11 @@ use Illuminate\Http\Request;
 class KontrakController extends Controller
 {
     // Menampilkan daftar kontrak
-    public function index(Kontrak $kontrak)
+    public function index()
     {
         return view('admin.kontrak', [
             "title" => "Kontrak",
-            "kontrak" => $kontrak->all(),
+            "kontrak" => Kontrak::orderBy('id', 'DESC')->get(),
         ]);
     }
 
@@ -23,16 +23,16 @@ class KontrakController extends Controller
     }
 
     // Menyimpan data kontrak baru
-    public function store(Request $request)
+    public function store(Request $request, Kontrak $kontrak)
     {
-        $request->validate([
+       $dataValidate = $request->validate([
             'nama' => 'required|in:Permanen,Sementara,Magang',
             'durasi_kontrak' => 'nullable|integer|min:0',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'deskripsi'=> 'nullable|string',
         ]);
-        Kontrak::create($request->all());
+        $kontrak->create($dataValidate);
 
         return redirect()->route('kontrak.index')->with('success', 'Kontrak berhasil ditambahkan.');
     }
@@ -49,20 +49,14 @@ class KontrakController extends Controller
     // Memperbarui data kontrak
     public function update(Request $request, Kontrak $kontrak)
     {
-        $request->validate([
+        $dataValidate = $request->validate([
             'nama' => 'required|in:Permanen,Sementara,Magang',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'nullable|date|after_or_equal:tanggal_mulai',
             'durasi_kontrak' => 'nullable|integer|min:0',
         ]);
 
-        $kontrak->update($request->only([
-            'nama',
-            'durasi_kontrak',
-            'tanggal_mulai',
-            'tanggal_selesai',
-            'deskripsi',
-        ]));
+        $kontrak->update($dataValidate);
 
         return redirect()->route('kontrak.index')->with('success', 'Kontrak berhasil diperbarui.');
     }

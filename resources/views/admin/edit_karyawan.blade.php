@@ -1,10 +1,10 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
-    <form action="{{ url('data_karyawan/' . $user->id . '/update') }}" method="POST" enctype="multipart/form-data"
+    <form action="{{ route('data_karyawan.update', $user->id) }}" method="POST" enctype="multipart/form-data"
         class="relative w-11/12 mx-auto mb-8 mt-4 p-2 bg-sky-300 border-2 border-sky-600 shadow-lg shadow-sky-700 rounded-lg sm:w-8/12 md:w-6/12 md:text-lg lg:w-5/12">
         @csrf
         @method('PATCH')
-        <a href="{{ url('/data_karyawan') }}"
+        <a href="{{ route('data_karyawan.index') }}"
             class="flex justify-center items-center absolute -right-2 -top-3 w-6 h-6 bg-gray-200 border border-gray-500 font-bold rounded-full shadow-md shadow-gray-500 md:-right-3 md:-top-3 md:w-8 md:h-8">X</a>
         @if ($errors->any)
             <ul>
@@ -116,7 +116,7 @@
             <img src="{{ asset('storage/' . $user->image) }}" alt="Image user" class="w-full h-full object-cover">
         </div>
         <button type="submit"
-            class="w-full block py-2 bg-blue-500 rounded-full font-semibold  text-white shadow-md shadow-sky-700  hover:bg-blue-600">Tambah</button>
+            class="w-full block py-2 bg-blue-500 rounded-full font-semibold  text-white shadow-md shadow-sky-700  hover:bg-blue-600">Edit</button>
     </form>
     <div class="batas w-full h-1 "></div>
     <script>
