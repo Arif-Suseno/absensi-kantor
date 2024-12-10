@@ -57,5 +57,6 @@ class JabatanController extends Controller
         $jabatan->delete();
         return redirect()->route('jabatan.index')->with('success', 'Jabatan berhasil dihapus');
     }
+   
 }
 

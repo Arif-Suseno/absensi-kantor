@@ -4,6 +4,8 @@
         <h1 class="text-2xl font-bold text-gray-800 mt-4 mb-6">Daftar Kontrak</h1>
         <a href="{{ route('kontrak.create') }}"
             class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Tambah Kontrak</a>
+        <a href="{{ route('admin.dashboard_admin') }}"
+            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Kembali</a>
         @if (session('success'))
             <div class="mt-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded-lg">
                 {{ session('success') }}

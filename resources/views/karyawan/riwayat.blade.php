@@ -7,9 +7,16 @@
                 {{ session('success') }}
             </div>
         @endif
-
-        <h1 class="text-3xl font-bold text-gray-800 mb-6">Riwayat Absensi</h1>
-
+        <div class="flex justify-between items-center mb-4">
+            <h1 class="text-3xl font-bold text-slate-200 mb-6">Riwayat Absensi</h1>
+            
+            <a href="{{ route('karyawan.dashboard') }}"
+                class="flex items-center py-2 px-4 bg-blue-600 text-white font-semibold rounded-lg shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <img src="{{ Vite::asset('public/images/backbutton.png') }}" alt="Back Button" class="w-6 h-6 mr-2">
+                Kembali Ke dashboard
+            </a>
+        </div>
+        
         
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">

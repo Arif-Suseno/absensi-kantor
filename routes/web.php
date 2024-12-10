@@ -45,6 +45,14 @@ Route::middleware('auth')->group(function(){
     // Logout start
     Route::get('/logout',[AuthController::class, 'logout']);
     // Logout end
+    // Dashboard start
+    // Karyawan
+    Route::get('/dashboard', [Controller::class, 'dashboard'])->name('karyawan.dashboard');
+    // Admin
+    Route::get('/dashboard_admin', [Controller::class, 'showDashboard'])->name('admin.dashboard_admin')->middleware('auth')->middleware('auth');
+    Route::get('/dashboard_admin', [Controller::class, 'dashboard_admin'])->name('admin.dashboard_admin');
+    // Dashboard end
+    
 });
 
 Route::middleware('guest')->group(function(){

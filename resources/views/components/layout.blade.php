@@ -14,11 +14,13 @@
     <link rel="icon" href="{{ Vite::asset('public/images/logo.jpg') }}" type="image/x-icon">
 </head>
 
-<body class="min-h-screen bg-gradient-to-r from-blue-900 to-gray-500 text-gray-800">
+{{-- jangan hapus relative --}}
+
+<body class="relative min-h-screen bg-gradient-to-r from-blue-900 to-gray-500 text-gray-800">
     <x-header></x-header>
     <x-sidebar></x-sidebar>
     <main>
-    <div class="container h-full mx-auto px-2 pt-2 md:px-3 md:pt-3 lg:pt-4 xl:px-0 xl:pt-5">
+        <div class="container h-full mx-auto px-2 pt-2 md:px-3 md:pt-3 lg:pt-4 xl:px-0 xl:pt-5">
             {{ $slot }}
         </div>
     </main>
