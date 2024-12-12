@@ -18,6 +18,11 @@
 
         <p class="text-slate-950 text-2xl">Selamat datang, {{ Auth::user()->nama }}!</p>
 
+        <!-- Jam Realtime -->
+        <div class="mt-4 text-right">
+            <p><span id="current-time"></span></p>
+        </div>
+
         <!-- Ringkasan Absensi -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
             <div class="bg-white shadow-md rounded-lg p-4">
@@ -33,6 +38,7 @@
                 <p class="text-2xl font-bold text-red-500">{{ $totalTidakHadir }}</p>
             </div>
         </div>
+
         <!-- Pengajuan Izin/Cuti Belum Disetujui -->
         <div class="mt-8 bg-white shadow-md rounded-lg p-6">
             <h2 class="text-xl font-semibold text-gray-800">Pengajuan Izin/Cuti Belum Disetujui</h2>
@@ -66,7 +72,6 @@
             @endif
         </div>
 
-
         <!-- Data Absensi Terbaru -->
         <div class="mt-8 bg-white shadow-md rounded-lg p-6">
             <h2 class="text-xl font-semibold text-gray-800">Data Absensi Terbaru</h2>
@@ -79,7 +84,7 @@
                         <th class="border border-gray-300 p-2">Status</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody id="absensiTableBody">
                     @foreach ($absensiTerbaru as $absensi)
                     <tr class="text-center">
                         <td class="border border-gray-300 p-2">{{ $absensi->tanggal }}</td>
@@ -98,4 +103,15 @@
         </div>
     </div>
 
+    <!-- Script untuk Jam Realtime -->
+    <script>
+        function updateTime() {
+            const currentTime = document.getElementById('current-time');
+            const now = new Date();
+            currentTime.innerText = now.toLocaleTimeString(); // Format waktu lokal
+        }
+        
+        setInterval(updateTime, 1000); // Update setiap 1 detik
+        updateTime(); // Panggil fungsi untuk pertama kali
+    </script>
 </x-layout>
