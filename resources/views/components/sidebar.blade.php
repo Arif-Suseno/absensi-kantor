@@ -1,6 +1,6 @@
 <div class="sidebar hidden">
     <ul
-        class="flex flex-col gap-2 absolute left-0 z-10 top-14 bottom-0 w-8/12 bg-gray-400 md:w-4/12 lg:w-3/12 xl:w-2/12">
+        class="flex flex-col gap-2 absolute left-0 z-10 top-14 bottom-0 w-8/12 bg-slate-100 md:w-4/12 lg:w-3/12 xl:w-2/12">
         @if (Auth::check())
             @if (auth()->user()->role === 'Admin')
                 <x-navlink href="/dashboard_admin" :active="request()->is('dashboard_admin')">

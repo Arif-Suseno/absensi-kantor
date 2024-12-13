@@ -4,18 +4,18 @@
     <br>
     <br>
     <div class="flex-1 flex items-center justify-center ">
-        <div class="max-w-lg w-full bg-white p-8 rounded-lg shadow-lg shadow shadow-black">
+        <div class="max-w-lg w-full bg-gray-300 p-8 rounded-lg shadow-lg shadow shadow-black">
             <h1 class="text-2xl font-bold mb-6 text-center">Formulir Absensi</h1>
 
             <form action="{{ route('karyawan.absensi.submit') }}" method="POST" >
                 @csrf
                 <div class="mb-4 ">
-                    <label for="nama" class="block text-sm font-medium text-gray-700">Nama</label>
+                    <label for="nama" class="block text-sm font-medium text-gray-800">Nama</label>
                     <input
                         type="text"
                         name="nama"
                         id="nama"
-                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
                         value="{{ Auth::user()->name }}" >
                 </div>
                 <input type="hidden" name="user_id" value="{{ Auth::id() }}">

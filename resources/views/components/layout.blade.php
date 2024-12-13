@@ -16,7 +16,7 @@
 
 {{-- jangan hapus relative --}}
 
-<body class="relative min-h-screen bg-gradient-to-r from-blue-900 to-gray-500 text-gray-800">
+<body class="relative min-h-screen bg-gradient-to-r from-blue-200 to-blue-50" style="background-image: url('{{ Vite::asset('public/images/bg.webp') }}'); background-size: cover; background-position: center; background-repeat: no-repeat;">
     <x-header></x-header>
     <x-sidebar></x-sidebar>
     <main>

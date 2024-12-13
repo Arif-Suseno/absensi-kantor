@@ -1,56 +1,82 @@
 <x-layout>
-    <x-slot:title>{{ $title ?? 'Pengajuan Izin Cuti' }}</x-slot:title>
+    <x-slot:title>{{ $title ?? 'Pengajuan Izin/Cuti' }}</x-slot:title>
 
     <div class="container mx-auto px-4 py-8">
-        <div class="max-w-2xl mx-auto bg-white p-8 rounded-lg shadow-lg">
-            <h2 class="text-3xl font-semibold text-center text-gray-800 mb-6">Pengajuan Cuti/Izin</h2>
+        <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow-lg border border-gray-200">
+            <!-- Judul -->
+            <div class="flex items-center justify-center mb-6">
+                <h2 class="text-3xl font-semibold text-gray-800 ml-3">Pengajuan Izin/Cuti</h2>
+            </div>
 
+            <!-- Pesan Sukses -->
             @if(session('success'))
-                <div class="bg-green-500 text-white p-4 rounded-lg mb-4">
+                <div class="bg-green-100 text-green-700 p-4 rounded-lg mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" stroke-width="1.5"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M5 13l4 4L19 7" />
+                    </svg>
                     {{ session('success') }}
                 </div>
             @endif
 
+            <!-- Form -->
             <form action="{{ route('pengajuan_cutiizin.create') }}" method="POST" class="space-y-6">
                 @csrf
 
-                <div class="form-group">
+                <!-- Input Tanggal Mulai -->
+                <div>
                     <label for="tanggal_mulai" class="block text-sm font-medium text-gray-700">Tanggal Mulai</label>
-                    <input type="date" name="tanggal_mulai" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('tanggal_mulai') }}" required>
+                    <input type="date" name="tanggal_mulai"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        value="{{ old('tanggal_mulai') }}" required>
                     @error('tanggal_mulai')
-                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div class="form-group">
+                <!-- Input Tanggal Selesai -->
+                <div>
                     <label for="tanggal_selesai" class="block text-sm font-medium text-gray-700">Tanggal Selesai</label>
-                    <input type="date" name="tanggal_selesai" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" value="{{ old('tanggal_selesai') }}" required>
+                    <input type="date" name="tanggal_selesai"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        value="{{ old('tanggal_selesai') }}" required>
                     @error('tanggal_selesai')
-                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div class="form-group">
+                <!-- Input Jenis Cuti/Izin -->
+                <div>
                     <label for="jenis" class="block text-sm font-medium text-gray-700">Jenis Cuti/Izin</label>
-                    <select name="jenis" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    <select name="jenis"
+                        class="w-full p-3 border border-gray-300 rounded-lg bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        required>
                         <option value="Cuti" {{ old('jenis') == 'Cuti' ? 'selected' : '' }}>Cuti</option>
                         <option value="Izin" {{ old('jenis') == 'Izin' ? 'selected' : '' }}>Izin</option>
                     </select>
                     @error('jenis')
-                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
-                <div class="form-group">
+                <!-- Input Alasan -->
+                <div>
                     <label for="alasan" class="block text-sm font-medium text-gray-700">Alasan</label>
-                    <textarea name="alasan" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4">{{ old('alasan') }}</textarea>
+                    <textarea name="alasan" rows="4"
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        placeholder="Jelaskan alasan pengajuan">{{ old('alasan') }}</textarea>
                     @error('alasan')
-                        <div class="text-red-500 text-sm mt-2">{{ $message }}</div>
+                        <p class="text-red-500 text-sm mt-2">{{ $message }}</p>
                     @enderror
                 </div>
 
+                <!-- Tombol Submit -->
                 <div class="text-center">
-                    <button type="submit" class="w-full py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Kirim Pengajuan</button>
+                    <button type="submit"
+                        class="w-full py-3 px-6 bg-indigo-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        Kirim Pengajuan
+                    </button>
                 </div>
             </form>
         </div>
