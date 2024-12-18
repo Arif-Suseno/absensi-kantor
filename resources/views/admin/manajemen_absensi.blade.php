@@ -6,9 +6,9 @@
     @else
     <!-- Tabel -->
     
+    <h1 class="text-4xl font-bold mb-4">{{ $title }}</h1>
 
     <div class="container mx-auto my-8 p-4 bg-white shadow-md rounded">
-        <h1 class="text-3xl font-bold mb-4">{{ $title }}</h1>
         <!-- Tabel -->
         <div class="overflow-x-auto">
             <table class="min-w-full text-xs sm:text-sm text-left text-gray-600 border border-gray-200">

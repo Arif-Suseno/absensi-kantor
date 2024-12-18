@@ -4,7 +4,7 @@
     </x-slot:title>
 
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 class="text-2xl sm:text-3xl font-bold text-white mb-6 text-center sm:text-left">
+        <h1 class="text-2xl sm:text-4xl font-bold text-black mb-6 text-center sm:text-left">
             {{ $title }}
         </h1>
 

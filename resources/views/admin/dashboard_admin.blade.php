@@ -1,48 +1,99 @@
 <x-layout>
-    <x-slot:title>{{ $title }}</x-slot:title>
+    <x-slot:title>Dashboard Admin</x-slot:title>
+    
+        <!-- Main Content -->
+        <div class="flex-1 p-8">
+        <h1 class="text-6xl font-bold text-gray-700 mb-6">Dashboard Admin</h1>
 
-    <div class="container mx-auto p-6">
-        <!-- Header -->
-        <h2 class="text-3xl font-bold text-neutral-200 mb-6">Dashboard Admin</h2>
-
-        <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <!-- Daftar Jabatan -->
-            <div class="bg-blue-600 text-white rounded-lg shadow-md p-4">
-                <h2 class="text-blue-400 text-center font-semibold mb-4 bg-black rounded-lg shadow-md">Daftar Jabatan</h2>
-                @foreach ($jabatans as $jabatan)
-                <ul>
-                    <li class="border-b border-white py-2">{{ $jabatan->nama_jabatan }}</li>
-                    <li class="border-b border-white py-2">{{ $jabatan->deskripsi }}</li>
-                </ul>
-                @endforeach
-            </div>
-            
-            <!-- V-Legal (Data Karyawan) -->
-            <div class="bg-teal-600 shadow rounded-lg p-4 col-span-2">
-                <h3 class="text-lg font-bold text-teal-500 text-center mb-4 bg-black rounded-lg shadow-md">Data Karyawan</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    @foreach ($karyawan as $data)
-                        <div class="bg-yellow-100 p-4 rounded-lg">
-                            <h4 class="font-bold text-gray-800">{{ $data->nama }}</h4>
-                            <p class="text-gray-600 text-sm">{{ $data->alamat }}</p>
-                        </div>
-                    @endforeach
-                </div>
+        <!-- Statistik Karyawan -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <!-- Card 1: Hadir -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-gray-800">Hadir</h2>
+                <p class="text-4xl font-bold text-green-500">{{ $absensiByStatus['Hadir'] ?? 0 }}</p>
+                <p class="text-gray-600">Jumlah karyawan yang hadir hari ini.</p>
             </div>
 
-            <!-- Monitoring Blanko -->
-            <div class="bg-rose-600 text-white rounded-lg p-4 col-span-1">
-                <h3 class="text-lg font-bold">Kontrak</h3>
-                <div class="bg-black text-white p-3 mt-4 rounded-lg">
-                    <p class="text-base font-bold">Jenis Kontrak:</p>
-                    <ul class="text-base font-bold list-disc list-inside mt-2">
-                        <li>Kontrak Sementara</li>
-                        <li>Kontrak Magang</li>
-                        <li>Permanen</li>
-                    </ul>
-                    <a href="{{ route('kontrak.index') }}" class="bg-blue-700 text-white px-4 py-2 mt-4 rounded block text-center">Lihat Detail</a>
-                </div>
+            <!-- Card 2: Sakit -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-gray-800">Sakit</h2>
+                <p class="text-4xl font-bold text-yellow-500">{{ $absensiByStatus['Sakit'] ?? 0 }}</p>
+                <p class="text-gray-600">Jumlah karyawan yang sedang sakit.</p>
+            </div>
+
+            <!-- Card 3: Cuti -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-gray-800">Cuti</h2>
+                <p class="text-4xl font-bold text-blue-500">{{ $absensiByStatus['Cuti'] ?? 0 }}</p>
+                <p class="text-gray-600">Jumlah karyawan yang sedang cuti.</p>
+            </div>
+
+            <!-- Card 4: Alpa -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-gray-800">Alpa</h2>
+                <p class="text-4xl font-bold text-red-500">{{ $absensiByStatus['Alpa'] ?? 0 }}</p>
+                <p class="text-gray-600">Jumlah karyawan yang tidak hadir tanpa keterangan.</p>
+            </div>
+
+            <!-- Card 5: Izin -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-gray-800">Izin</h2>
+                <p class="text-4xl font-bold text-orange-500">{{ $absensiByStatus['Izin'] ?? 0 }}</p>
+                <p class="text-gray-600">Jumlah karyawan yang izin.</p>
+            </div>
+
+            <!-- Card 6: Notifikasi Cuti/Izin -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg">
+                <h2 class="text-xl font-semibold mb-2 text-gray-800">Pengajuan Izin & Cuti</h2>
+                <p class="text-4xl font-bold text-purple-500">{{ $izinPending ?? 0 }}</p>
+                <p class="text-gray-600">Permintaan izin/cuti yang belum disetujui.</p>
+                <a href="/persetujuan_izin&cuti" class="mt-4 inline-block text-blue-500 hover:underline">
+                    Lihat Permintaan
+                </a>
+            </div>
+        </div>
+
+            <!-- Grafik Absensi per Status -->
+            <div class="p-6 bg-white rounded-lg shadow-md hover:shadow-lg"  style="position: relative; width: 100%; height: 600px;">
+                <h2 class="text-xl font-semibold mb-2 text-gray-800">Grafik Absensi per Status</h2>
+                <canvas id="absensiChart" class="w-full h-64"></canvas>
             </div>
         </div>
     </div>
+    
+    <script>
+        const ctx = document.getElementById('absensiChart').getContext('2d');
+        const absensiChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Hadir', 'Sakit', 'Cuti', 'Alpa', 'Izin'],
+        datasets: [{
+            label: 'Status Absensi',
+            data: [
+                {{ $absensiByStatus['Hadir'] ?? 0 }},
+                {{ $absensiByStatus['Sakit'] ?? 0 }},
+                {{ $absensiByStatus['Cuti'] ?? 0 }},
+                {{ $absensiByStatus['Alpa'] ?? 0 }},
+                {{ $absensiByStatus['Izin'] ?? 0 }}
+            ],
+            backgroundColor: [
+                '#4CAF50', '#FFEB3B', '#2196F3', '#F44336', '#FFC107'
+            ],
+            borderColor: '#fff',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true,
+                ticks: {
+                    stepSize: 1
+                }
+            }
+        }
+    }
+});
+    </script>
 </x-layout>

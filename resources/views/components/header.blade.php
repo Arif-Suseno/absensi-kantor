@@ -13,11 +13,17 @@
             <img src="{{ Vite::asset('public/images/logo3.png') }}" alt="Logo" class="w-10 h-10 rounded-full">
             <h1 class="ml-2 text-gray-800">GSI</h1>
         </div>
+        
     </section>
+
 
 
     {{-- Right Section --}}
     <section class="flex items-center gap-4 justify-end">
+        <!-- Jam Realtime -->
+        <div class="mt-4 mb-5">
+            <p class="text-lg font-semibold text-gray-600"><span id="current-time" class="text-blue-700"></span></p>
+        </div>
         {{-- Link Logout --}}
         <a href="{{ url('/logout') }}"
             class="px-4 py-2 bg-red-600 text-white font-semibold border border-transparent rounded-full shadow-md shadow-red-500/50 hover:bg-red-700 hover:red-violet-700/50 focus:ring-2 focus:ring-violet-300 transition-all duration-300 ease-in-out transform hover:scale-105">
@@ -32,4 +38,17 @@
             </a>
         @endauth
     </section>
+
+    <!-- Script Jam Realtime -->
+    <script>
+        function updateTime() {
+            const currentTime = document.getElementById('current-time');
+            const now = new Date();
+            currentTime.innerText = now.toLocaleTimeString(); 
+        }
+        setInterval(updateTime, 1000);
+        updateTime();
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </header>

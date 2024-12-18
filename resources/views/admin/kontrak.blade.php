@@ -1,11 +1,9 @@
 <x-layout>
     <x-slot:title>{{ $title }}</x-slot:title>
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 class="text-2xl font-bold text-gray-800 mt-4 mb-6">Daftar Kontrak</h1>
+        <h1 class="text-3xl font-bold text-gray-800 mt-4 mb-6">Daftar Kontrak</h1>
         <a href="{{ route('kontrak.create') }}"
-            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Tambah Kontrak</a>
-        <a href="{{ route('admin.dashboard_admin') }}"
-            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg">Kembali</a>
+            class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-xl">Tambah Kontrak</a>
         @if (session('success'))
             <div class="mt-4 p-4 bg-green-100 border border-green-200 text-green-700 rounded-lg">
                 {{ session('success') }}
@@ -15,7 +13,7 @@
             <table class="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead class="bg-gray-100">
                     <tr>
-                        <th class="px-4 py-2 text-left text-gray-600 font-medium">#</th>
+                        <th class="px-4 py-2 text-left text-gray-600 font-medium">No</th>
                         <th class="px-4 py-2 text-left text-gray-600 font-medium">Nama</th>
                         <th class="px-4 py-2 text-left text-gray-600 font-medium">Durasi</th>
                         <th class="px-4 py-2 text-left text-gray-600 font-medium">Tanggal Mulai</th>

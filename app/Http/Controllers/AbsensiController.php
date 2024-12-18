@@ -28,7 +28,7 @@ class AbsensiController extends Controller
         Absensi::create([
             'user_id' => $request->user_id,
             'tanggal' => Carbon::now()->toDateString(),
-            'waktu_masuk' => Carbon::now()->format('H:i:s'),
+            'waktu_masuk' => Carbon::now()->toTimeString(),
             'waktu_keluar' => Carbon::createFromTime(16, 0, 0)->format('H:i:s'),
             'status' => $request->status,
         ]);

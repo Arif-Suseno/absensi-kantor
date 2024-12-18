@@ -2,7 +2,7 @@
     <x-slot:title>{{ $title }}</x-slot:title>
     @auth
         <div class="h-screen">
-            <div class="flex items-center justify-center min-h-auto">
+            <div class="flex items-center justify-center min-h-auto border-l-inherit">
                 <div class="bg-white shadow-lg rounded-lg w-full max-w-md p-6">
                     <div class="text-center mb-6">
                         <h2 class="text-2xl font-bold text-gray-700">Profil</h2>
@@ -19,7 +19,7 @@
                         <div id="image-full"
                             class="hidden opacity-0 target:opacity-100  target:block  fixed top-0 right-0 bottom-0 left-0 bg-black bg-opacity-80">
                             <a href="#"
-                                class="flex items-center justify-center absolute top-12 right-10 w-6 z-20 aspect-square rounded-full bg-white text-center md:right-40 lg:right-60 lg:w-8 xl:right-96">X</a>
+                                class="flex items-center justify-center absolute top-12 right-10 w-6 z-20 aspect-square rounded-full bg-white text-center md:right-40 lg:right-60 lg:w-8 xl:right-96 font-bold">X</a>
                             <img src="{{ $user->image ? asset('storage/' . $user->image) : asset('images/profile_default.png') }}"
                                 alt="Profile Picture"
                                 class="absolute w-8/12 top-16 left-14 aspect-square border-2 border-gray-500 shadow-xl shadow-gray-800 bg-white rounded-md md:left-52 md:w-6/12 lg:left-64 xl:w-5/12 xl:left-96">

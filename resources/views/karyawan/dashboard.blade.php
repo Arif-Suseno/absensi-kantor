@@ -6,10 +6,10 @@
 
             <!-- Tombol Absensi -->
             <div class="flex flex-col items-end">
-                <p class="text-gray-600 font-medium mb-2">Belum Absen??</p>
+                <p class="text-gray-600 font-medium mb-2">Belum absen?</p>
                 <a href="{{ route('karyawan.absensi') }}"
                     class="py-2 px-5 bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-600 transition-all duration-300">
-                    Absen Sekarang
+                    Absen sekarang
                 </a>
             </div>
         </div>
@@ -17,10 +17,7 @@
         <!-- Selamat Datang -->
         <p class="text-gray-800 text-2xl mb-4">Selamat datang, <span class="font-semibold">{{ Auth::user()->nama }}</span>!</p>
 
-        <!-- Jam Realtime -->
-        <div class="mt-4 text-right">
-            <p class="text-lg font-semibold text-gray-600"><span id="current-time" class="text-blue-700"></span></p>
-        </div>
+        
 
         <!-- Ringkasan Absensi -->
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
@@ -100,14 +97,5 @@
         </div>
     </div>
 
-    <!-- Script Jam Realtime -->
-    <script>
-        function updateTime() {
-            const currentTime = document.getElementById('current-time');
-            const now = new Date();
-            currentTime.innerText = now.toLocaleTimeString(); 
-        }
-        setInterval(updateTime, 1000);
-        updateTime();
-    </script>
+    
 </x-layout>
