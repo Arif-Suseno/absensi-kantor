@@ -9,56 +9,29 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Absensi;
 use App\Models\Jabatan;
 use App\Models\Kontrak;
 use App\Models\IzinCuti;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Auth\User;
+use Illuminate\Support\Facades\Auth;
 
 class Controller
 {
-    // public function showDashboard()
-    // {
-    //     // Menampilkan data karyawan (nama dan alamat)
-    //     $karyawan = DB::table('users')->get(['nama', 'alamat']);
-
-    //     // Menampilkan data izin/cuti terbaru
-    //     $cutiLogs = DB::table('cuti_izin')->join('users', 'cuti_izin.user_id', '=', 'users.id')
-    //         ->select('users.nama', 'cuti_izin.tanggal_mulai', 'cuti_izin.tanggal_selesai')
-    //         ->orderBy('cuti_izin.created_at', 'desc')
-    //         ->get();
-
-    //     // Menampilkan data absensi
-    //     $absensiLogs = DB::table('absensi')->join('users', 'absensi.user_id', '=', 'users.id')
-    //         ->select('users.nama', 'absensi.tanggal', 'absensi.status')
-    //         ->orderBy('absensi.tanggal', 'desc')
-    //         ->get();
-
-    //     // Return view dengan data
-    //     return view('admin.dashboard_admin', compact('karyawan', 'cutiLogs', 'absensiLogs'))->with('title', 'Dashboard Admin');
-    // }
-
-    // public function dashboard_admin()
-    // {
-    //     // Ambil 5 data karyawan terbaru
-    //     $karyawan = \App\Models\User::latest()->take(6)->get();
-        
-    //     // Ambil maksimal 3 data jabatan
-    //     $jabatans = Jabatan::latest()->take(3)->get();
-        
-    //     $title = 'Dashboard Admin'; // Judul halaman
-    //     return view('admin.dashboard_admin', compact('karyawan', 'jabatans', 'title'));
-    // }
     public function showDashboard()
     {
-        {
+        $userId = Auth::user()->id;
             // Ambil data statistik
             $totalKaryawan = User::where('role', 'karyawan')->count();
-            $totalAbsensi = Absensi::count();
-            $totalJabatan = Jabatan::count();
-            $totalKontrak = Kontrak::count();
+            $totalHadir = Absensi::where('waktu', 'Masuk')->where('status', 'Hadir')->count();
+            $totalSakit = Absensi::where('waktu', 'Masuk')->where('status', 'Sakit')->count();
+            $totalCuti = Absensi::where('waktu', 'Masuk')->where('status', 'Cuti')->count();
+            $totalIzin = Absensi::where('waktu', 'Masuk')->where('status', 'Izin')->count();
+            $totalAlpa = Absensi::where('waktu', 'Masuk')->where('status', 'Alpa')->count();
             $izinPending = IzinCuti::where('status', 'Diajukan')->count();
     
             // Data untuk grafik absensi
@@ -69,23 +42,25 @@ class Controller
     
             return view('admin.dashboard_admin', [
                 'totalKaryawan' => $totalKaryawan,
-                'totalAbsensi' => $totalAbsensi,
-                'totalJabatan' => $totalJabatan,
-                'totalKontrak' => $totalKontrak,
+                'totalHadir' => $totalHadir,
+                'totalSakit' => $totalSakit,
+                'totalCuti' => $totalCuti,
+                'totalIzin' => $totalIzin,
+                'totalAlpa' => $totalAlpa,
                 'izinPending' => $izinPending,
                 'absensiByStatus' => $absensiByStatus
             ]);
-        }
+        
     }
 
 
     public function dashboard()
     {
-        $userId = auth()->user()->id;
-
+        $userId = Auth::user()->id;
+        
         // Data absensi
         $totalHadir = Absensi::where('user_id', $userId)
-            ->where('status', 'Hadir')->count();
+            ->where('status', 'Hadir')->where('waktu', 'Keluar')->count();
         $totalIzin = IzinCuti::where('user_id', $userId)
             ->whereIn('jenis', ['Izin', 'Cuti'])
             ->where('status', 'Disetujui')->count();

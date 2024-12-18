@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Support\Facades\Log;
-use Illuminate\Http\Request;
 use App\Models\IzinCuti;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
 
 class CutiIzinController extends Controller
 {
@@ -31,7 +32,7 @@ class CutiIzinController extends Controller
         ]);
 
         $izin = IzinCuti::create([
-            'user_id' => auth()->id(),
+            'user_id' => Auth::user()->id,
             'jenis' => $request->jenis,
             'alasan' => $request->alasan,
             'tanggal_mulai' => $request->tanggal_mulai,
@@ -46,7 +47,7 @@ class CutiIzinController extends Controller
     public function persetujuanIzinIndex()
     {
         $title = 'Persetujuan Izin dan Cuti';
-        $pengajuan = IzinCuti::where('status', 'Diajukan')->with('user')->get();
+        $pengajuan = IzinCuti::where('status', 'Diajukan')->with('user')->orderBy('id', 'Desc')->paginate(10);
         Log::info('Pengajuan izin yang ditampilkan:', $pengajuan->toArray()); // Debug data
         return view('admin.persetujuan_izin&cuti', compact('pengajuan', 'title'));
     }

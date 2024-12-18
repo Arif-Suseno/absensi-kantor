@@ -95,9 +95,13 @@ class UserController extends Controller
     $validateData['password'] = bcrypt($validateData['password']);
 
     // Simpan data
-    $user->create($validateData);
+    $create = $user->create($validateData);
     // Redirect setelah data berhasil disimpan
-    return redirect()->route('data_karyawan.index')->with('success', 'Data berhasil ditambahkan!');
+    if($create){
+        return redirect()->route('data_karyawan.index')->with('success', 'Data berhasil ditambahkan!');
+    }else{
+        return redirect()->back()->with('error', 'Data gagal ditambahkan!');
+    }
     }
 
     // Menampilan form edit karyawan berdasarkan id
@@ -206,6 +210,7 @@ class UserController extends Controller
     
     public function updateProfile(Request $request)
     {   
+        
           // Validasi input
         $validatedData = $request->validate([
             'nama' => 'required|string|min:3|max:255',
@@ -244,6 +249,7 @@ class UserController extends Controller
         }else{
             $validatedData['image'] = $user->image;
         }
+        
         $update = $user->update($validatedData);
         if ($update) {
             return redirect()->back()->with('message', 'Data berhasil diperbarui!');

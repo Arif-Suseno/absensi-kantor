@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class JabatanController extends Controller
 {
-    public function index(Jabatan $jabatan)
+    public function index(Jabatan $jabatan, Request $request)
     {
-        $jabatans = $jabatan->orderBy('id', 'DESC')->get();
+        $search = $request->input('search');
+        $jabatans = $jabatan->when($search, function ($query) use ($search) {
+            $query->where('nama_jabatan', 'LIKE', "%$search%") // Filter kolom nama
+                ->orWhere('deskripsi', 'LIKE', "%$search%"); // Filter kolom role
+        })
+        ->orderBy('id', 'desc') // Urutkan berdasarkan ID secara menurun
+        ->paginate(10); // Batasi 10 data per halaman
         $title = 'Daftar Jabatan'; // Judul halaman
-        return view('admin.jabatan', compact('jabatans', 'title'));
+        return view('admin.jabatan',['search' => $search], compact('jabatans', 'title'));
     }
 
     // Menampilkan form untuk menambah jabatan

@@ -14,14 +14,32 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Nonaktifkan pengecekan foreign key
-    DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    //     // Nonaktifkan pengecekan foreign key
+    // DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
-    // Truncate tabel users
-    DB::table('users')->truncate();
+    // // Truncate tabel users
+    // DB::table('users')->truncate();
 
-    // Aktifkan kembali pengecekan foreign key
-    DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        User::factory()->count(20)->create();
+    // // Aktifkan kembali pengecekan foreign key
+    // DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+    //     User::factory()->count(20)->create();
+
+        DB::table('users')->insert([
+            [
+            'jabatan_id' => '1',
+            'kontrak_id' => '1',
+            'nama' => 'Arif Suseno',
+            'email' => 'arifsuseno@gmail.com',
+            'password' => bcrypt('123456') ,
+            'role' => 'Admin'
+        ],
+        [
+            'jabatan_id' => '1',
+            'kontrak_id' => '1',
+            'nama' => 'Seno',
+            'email' => 'seno@gmail.com',
+            'password' => bcrypt('654321'),            
+            'role' => 'Karyawan'
+        ]]);
 }
 }

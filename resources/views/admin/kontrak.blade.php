@@ -9,6 +9,16 @@
                 {{ session('success') }}
             </div>
         @endif
+        {{-- Form search --}}
+        <form action="" method="GET" class="flex items-center space-x-3 my-4 ">
+            <input type="search" name="search" id="search" value="{{ $search }}" autocomplete="off"
+                class="w-8/12 border border-gray-300 shadow-md shadow-gray-500 rounded-full px-2 py-1 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-300 sm:w-9/12 md:w-10/12 lg:w-11/12"
+                placeholder="Cari sesuatu...">
+            <button type="submit"
+                class="bg-red-500 text-white px-2 py-2 rounded-full hover:bg-red-600 focus:ring-2 focus:ring-red-300 focus:ring-offset-1 transition duration-300">
+                🔎 Cari
+            </button>
+        </form>
         <div class="overflow-x-auto mt-6">
             <table class="min-w-full bg-white border border-gray-200 rounded-lg">
                 <thead class="bg-gray-100">
@@ -29,7 +39,7 @@
                             <td class="px-4 py-2">{{ $item->durasi_kontrak ?? '-' }}</td>
                             <td class="px-4 py-2">{{ $item->tanggal_mulai }}</td>
                             <td class="px-4 py-2">{{ $item->tanggal_selesai ?? '-' }}</td>
-                            <td class="px-4 py-2 space-x-2">
+                            <td class="px-4 py-2 space-x-2 flex items-center h-full">
                                 <a href="{{ route('kontrak.edit', $item->id) }}"
                                     class="bg-yellow-500 hover:bg-yellow-600 text-white py-1 px-3 rounded-lg text-sm">Edit</a>
                                 <form action="{{ route('kontrak.destroy', $item->id) }}" method="POST"
@@ -43,8 +53,19 @@
                             </td>
                         </tr>
                     @endforeach
+                    @if ($kontrak->isEmpty())
+                        <tr>
+                            <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                                Tidak Ada Data
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
+            {{-- link paginate --}}
+            <div class="my-4">
+                {{ $kontrak->appends(['search' => $search])->links() }}
+            </div>
         </div>
     </div>
 </x-layout>

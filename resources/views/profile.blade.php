@@ -36,7 +36,7 @@
                     <div class="mt-6 flex justify-center">
                         <button onclick="toggleEdit()"
                             class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 focus:outline-none">
-                            Tampilkan Edit
+                            Edit
                         </button>
                     </div>
                     {{-- Edit profile start --}}
@@ -67,9 +67,6 @@
                                 <label class="block text-sm font-medium text-gray-600">Agama :</label>
                                 <select name="agama" id="agama"
                                     class="w-full bg-gray-100 px-4 py-2 rounded text-gray-700 md:text-base">
-                                    @if (!$user->agama)
-                                        <option selected>Pilih agama</option>
-                                    @endif
                                     <option value="Islam" {{ $user->agama === 'Islam' ? 'selected' : '' }}>Islam
                                     </option>
                                     <option value="Kristen" {{ $user->agama === 'Kristen' ? 'selected' : '' }}>Kristen

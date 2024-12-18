@@ -3,6 +3,10 @@
     <form method="POST" action="{{ route('data_karyawan.store') }}"
         class="relative w-full mx-auto mb-8 mt-4 p-2  bg-sky-300 border-2 border-sky-600 shadow-lg shadow-sky-700 rounded-lg md:w-6/12 lg:w-5/12">
         @csrf
+        @if (session('error'))
+            <div class="text-red-500">{{ session('error') }}</div>
+        @endif
+
         <a href="{{ url('/data_karyawan') }}"
             class="flex justify-center items-center absolute -right-2 -top-3 w-6 h-6 bg-gray-200 border border-gray-500 font-bold rounded-full shadow-md shadow-gray-500 md:-right-3 md:-top-3 md:w-8 md:h-8">X</a>
         <h1 class="mb-4 mt-2 text-base font-bold text-center md:text-lg">Menambah Data Karyawan</h1>

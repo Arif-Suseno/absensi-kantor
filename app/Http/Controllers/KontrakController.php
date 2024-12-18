@@ -8,11 +8,23 @@ use Illuminate\Http\Request;
 class KontrakController extends Controller
 {
     // Menampilkan daftar kontrak
-    public function index()
+    public function index(Request $request)
     {
+        $search = $request->input('search');
+
+        $kontrak = Kontrak::when($search, function ($query) use ($search) {
+            $query->where('nama', 'LIKE', "%$search%") // Filter kolom nama
+                ->orWhere('durasi_kontrak', 'LIKE', "%$search%") // Filter kolom role
+                ->orWhere('tanggal_mulai', 'LIKE', "%$search%") // Filter kolom role
+                ->orWhere('tanggal_selesai', 'LIKE', "%$search%") // Filter kolom role
+                ->orWhere('deskripsi', 'LIKE', "%$search%"); // Filter kolom role
+        })
+        ->orderBy('id', 'desc') // Urutkan berdasarkan ID secara menurun
+        ->paginate(10); // Batasi 10 data per halaman
         return view('admin.kontrak', [
             "title" => "Kontrak",
-            "kontrak" => Kontrak::orderBy('id', 'DESC')->get(),
+            "kontrak" =>$kontrak,
+            'search'=>$search
         ]);
     }
 

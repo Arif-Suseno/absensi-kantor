@@ -22,12 +22,24 @@
                 Tambah Jabatan
             </a>
         </div>
-
+        {{-- Form search --}}
+        <form action="" method="GET" class="flex items-center space-x-3 mb-4 ">
+            <input type="search" name="search" id="search" value="{{ $search }}" autocomplete="off"
+                class="w-8/12 border border-gray-300 shadow-md shadow-gray-500 rounded-full px-2 py-1 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition duration-300 sm:w-9/12 md:w-10/12 lg:w-11/12"
+                placeholder="Cari sesuatu...">
+            <button type="submit"
+                class="bg-red-500 text-white px-2 py-2 rounded-full hover:bg-red-600 focus:ring-2 focus:ring-red-300 focus:ring-offset-1 transition duration-300">
+                🔎 Cari
+            </button>
+        </form>
         <!-- Tabel Responsif -->
         <div class="overflow-x-auto">
             <table class="min-w-full bg-white border-gray-400 rounded-lg shadow-md">
                 <thead>
                     <tr class="bg-gray-400">
+                        <th class="text-left px-4 sm:px-6 py-3 text-sm font-medium text-gray-600 border-b">
+                            No
+                        </th>
                         <th class="text-left px-4 sm:px-6 py-3 text-sm font-medium text-gray-600 border-b">
                             Nama
                         </th>
@@ -40,8 +52,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($jabatans as $jabatan)
+
+                    @foreach ($jabatans as $index => $jabatan)
                         <tr class="hover:bg-gray-50">
+                            <td class="px-4 sm:px-6 py-4 text-gray-800 border-b">
+                                {{ ++$index }}
+                            </td>
                             <td class="px-4 sm:px-6 py-4 text-gray-800 border-b">
                                 {{ $jabatan->nama_jabatan }}
                             </td>
@@ -66,8 +82,19 @@
                             </td>
                         </tr>
                     @endforeach
+                    @if ($jabatans->isEmpty())
+                        <tr>
+                            <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">
+                                Tidak Ada Data
+                            </td>
+                        </tr>
+                    @endif
                 </tbody>
             </table>
+            {{-- link paginate --}}
+            <div class="my-4">
+                {{ $jabatans->appends(['search' => $search])->links() }}
+            </div>
         </div>
     </div>
 </x-layout>
