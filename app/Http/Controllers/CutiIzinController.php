@@ -12,7 +12,11 @@ class CutiIzinController extends Controller
     // Menampilkan form pengajuan
     public function index()
     {
-        return view('karyawan.pengajuan_cutiizin', ['title' => 'Pengajuan Izin']);
+        $pengajuan = IzinCuti::where('user_id', Auth::id())->get(); // Ambil data milik user login
+        return view('karyawan.pengajuan_cutiizin', [
+            'title' => 'Pengajuan Izin',
+            'pengajuan' => $pengajuan
+        ]);
     }
     public function create()
     {
@@ -42,6 +46,13 @@ class CutiIzinController extends Controller
 
         Log::info('Data berhasil disimpan:', $izin->toArray()); // Logging data yang disimpan
         return redirect()->route('pengajuan_cutiizin.create')->with('success', 'Pengajuan cuti/izin berhasil diajukan.');
+    }
+    public function destroy($id)
+    {
+        $izin = IzinCuti::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
+        $izin->delete();
+
+        return redirect()->back()->with('success', 'Pengajuan berhasil dihapus.');
     }
 
     public function persetujuanIzinIndex()
