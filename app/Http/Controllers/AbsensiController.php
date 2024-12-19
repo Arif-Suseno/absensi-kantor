@@ -115,7 +115,11 @@ class AbsensiController extends Controller
                 ->orWhere('waktu', 'LIKE', "%$search%") // Filter kolom role
                 ->orWhere('waktu_masuk', 'LIKE', "%$search%") // Filter kolom role
                 ->orWhere('waktu_keluar', 'LIKE', "%$search%") // Filter kolom role
-                ->orWhere('status', 'LIKE', "%$search%"); // Filter kolom role
+                ->orWhere('status', 'LIKE', "%$search%") // Filter kolom role
+                ->orWhereHas('user', function ($userQuery) use ($search) {
+                    // Filter berdasarkan kolom di tabel user
+                    $userQuery->where('nama', 'LIKE', "%$search%");
+                });
         })
         ->orderBy('id', 'desc') // Urutkan berdasarkan ID secara menurun
         ->paginate(10); // Batasi 10 data per halaman

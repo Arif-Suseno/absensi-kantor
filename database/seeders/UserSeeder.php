@@ -55,7 +55,7 @@ class UserSeeder extends Seeder
             'nama' => 'Ditya',
             'email' => 'R9@gmail.com',
             'password' => bcrypt('111111') ,
-            'role' => 'Admin'
+            'role' => 'Karyawan'
         ],
         [
             'jabatan_id' => '1',
