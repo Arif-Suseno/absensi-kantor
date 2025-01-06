@@ -24,7 +24,6 @@ class Controller
 {
     public function showDashboard()
     {
-        $userId = Auth::user()->id;
             // Ambil data statistik
             $totalKaryawan = User::where('role', 'karyawan')->count();
             $totalHadir = Absensi::where('waktu', 'Masuk')->where('status', 'Hadir')->count();

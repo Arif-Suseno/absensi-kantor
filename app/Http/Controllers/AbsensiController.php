@@ -10,6 +10,8 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isNull;
+
 class AbsensiController extends Controller
 {
     // Tampilkan halaman absensi dengan formulir
@@ -18,71 +20,59 @@ class AbsensiController extends Controller
         return view('karyawan.absensi', ['title' => 'Formulir Absensi']);
     }
 
-    public function store(Request $request)
-    {
-       $dataValidate = $request->validate([
-            'user_id' => 'required|exists:users,id',
-            'waktu' => 'required|in:Masuk,Keluar',
-            'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
-        ]);
-
-    
-        // Ambil tanggal hari ini
-        $tanggalHariIni = Carbon::now()->toDateString();
-    
-        // Cek apakah absensi sudah ada untuk user_id dan tanggal
-        $absensi = Absensi::where('user_id', $dataValidate['user_id'])
-                          ->where('tanggal', $tanggalHariIni)
-                          ->first();
-    
-        if(!$dataValidate && $tanggalHariIni){
-            Absensi::create(
-                [
-                'user_id' => $dataValidate['user_id'], 
-                'tanggal' => $tanggalHariIni,
-                'status' => 'Alpa',
-                ]
-            );
-        }
-        if ($dataValidate['waktu'] === 'Masuk') {
-            // Cek apakah sudah ada waktu masuk untuk hari ini
-            if ($absensi && $absensi->waktu_masuk) {
-                return redirect()->back()->with('error', 'Anda sudah absen masuk hari ini!');
-            }
-    
-            // Buat atau perbarui waktu masuk
-            Absensi::create(
-                [
-                'user_id' => $dataValidate['user_id'], 
-                'tanggal' => $tanggalHariIni,
-                'waktu' => $dataValidate['waktu'],
-                'waktu_masuk' => Carbon::now()->format('H:i:s'),
-                'status' => $dataValidate['status'],
-                ]
-            );
-        } elseif ($dataValidate['waktu'] === 'Keluar') {
-            // Cek apakah absensi masuk sudah ada
-            if (!$absensi || !$absensi->waktu_masuk) {
-                return redirect()->back()->with('error', 'Anda belum absen masuk hari ini!');
-            }
-    
-            // Cek apakah sudah ada waktu keluar untuk hari ini
-            if ($absensi->where('waktu', 'Keluar')->exists()) {
-                return redirect()->back()->with('error', 'Anda sudah absen keluar hari ini!');
-            }
-    
-            Absensi::create([
-                'user_id' => $dataValidate['user_id'], 
-                'tanggal' => $tanggalHariIni,
-                'waktu' => $dataValidate['waktu'],
-                'waktu_masuk' => $absensi->waktu_masuk,
-                'waktu_keluar' => Carbon::now()->format('H:i:s'),
-                'status' => $dataValidate['status'],          
+        public function store(Request $request)
+        {
+        $dataValidate = $request->validate([
+                'user_id' => 'required|exists:users,id',
+                'waktu' => 'required|in:Masuk,Keluar',
+                'status' => 'required|in:Hadir,Sakit,Cuti,Alpa,Izin',
             ]);
+
+        
+            // Ambil tanggal hari ini
+            $tanggalHariIni = Carbon::today();
+        
+            // Cek apakah absensi sudah ada untuk user_id dan tanggal
+            $absensi = Absensi::where('user_id', $dataValidate['user_id'])
+                            ->where('tanggal', $tanggalHariIni)
+                            ->first();
+        
+            if ($dataValidate['waktu'] === 'Masuk') {
+                // Cek apakah sudah ada waktu masuk untuk hari ini
+                if ($absensi && !is_null($absensi->waktu_masuk)) {
+                    return redirect()->back()->with('error', 'Anda sudah absen masuk hari ini!');
+                }
+        
+                // Buat atau perbarui waktu masuk
+                Absensi::create(
+                    [
+                    'user_id' => $dataValidate['user_id'], 
+                    'tanggal' => $tanggalHariIni,
+                    'waktu' => $dataValidate['waktu'],
+                    'waktu_masuk' => Carbon::now()->format('H:i:s'),
+                    'status' => $dataValidate['status'],
+                    ]
+                );
+            } elseif ($dataValidate['waktu'] === 'Keluar') {
+                // Cek apakah absensi masuk sudah ada
+                if (!$absensi || !$absensi->waktu_masuk) {
+                    return redirect()->back()->with('error', 'Anda belum absen masuk hari ini!');
+                }
+        
+                // Cek apakah sudah ada waktu keluar untuk hari ini
+                if (!is_null($absensi->waktu_keluar)) {
+                    return redirect()->back()->with('error', 'Anda sudah absen keluar hari ini!');
+                }
+        
+                $absensi->update([
+                    'waktu' => $dataValidate['waktu'],
+                    'waktu_keluar' => Carbon::now()->format('H:i:s'),
+                    'status' => $dataValidate['status'],          
+                ]);
+            }
+            return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
         }
-        return redirect()->route('karyawan.riwayat')->with('success', 'Absensi berhasil disimpan!');
-    }
-    
+        
 
     public function riwayat(Request $request)
     {

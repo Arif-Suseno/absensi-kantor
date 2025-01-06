@@ -4,7 +4,7 @@
     <br>
     <br>
     <div class="flex-1 flex items-center justify-center ">
-        <div class="max-w-lg w-full bg-gray-300 p-8 rounded-lg shadow-lg shadow shadow-black">
+        <div class="max-w-lg w-full bg-gray-300 p-8 rounded-lg shadow-lg shadow-black">
             @if (session('error'))
                 <div class="text-red-500">
                     {{ session('error') }}
