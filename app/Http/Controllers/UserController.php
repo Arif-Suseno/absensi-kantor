@@ -26,7 +26,16 @@ class UserController extends Controller
                 $query->where('nama', 'LIKE', "%$search%") // Filter kolom nama
                     ->orWhere('role', 'LIKE', "%$search%") // Filter kolom role
                     ->orWhere('gender', 'LIKE', "%$search%") // Filter kolom role
-                    ->orWhere('email', 'LIKE', "%$search%"); // Filter kolom role
+                    ->orWhere('email', 'LIKE', "%$search%") // Filter kolom role
+                    ->orWhereHas('kontrak', function ($kontrak) use ($search) {
+                        // Filter berdasarkan kolom di tabel user
+                        $kontrak->where('nama', 'LIKE', "%$search%");
+                    })
+                    ->orWhereHas('jabatan', function ($jabatan) use ($search) {
+                        // Filter berdasarkan kolom di tabel user
+                        $jabatan->where('nama_jabatan', 'LIKE', "%$search%");
+                    });
+
             })
             ->orderBy('id', 'desc') // Urutkan berdasarkan ID secara menurun
             ->paginate(10); // Batasi 10 data per halaman

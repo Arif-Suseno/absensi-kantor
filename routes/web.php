@@ -43,8 +43,9 @@ Route::middleware(['auth', RoleMiddleware::class. ':Karyawan'])->group(function(
     Route::get('/riwayat', [AbsensiController::class, 'riwayat'])->name('karyawan.riwayat');
     //EndAbsensi
     // Pengajuan izin cuti start
-    Route::get('/pengajuan_cutiizin', [CutiIzinController::class, 'create'])->name('karyawan.pengajuan_cutiizin');
+    Route::get('/pengajuan_cutiizin', [CutiIzinController::class, 'index'])->name('karyawan.pengajuan_cutiizin');
     Route::post('/pengajuan_cutiizin', [CutiIzinController::class, 'store'])->name('pengajuan_cutiizin.create');
+    Route::delete('/pengajuan_cutiizin/{id}', [CutiIzinController::class, 'destroy'])->name('pengajuan_cutiizin.destroy');
     // Pengajuan izin cuti end
     Route::get('/dashboard', [Controller::class, 'dashboard'])->name('karyawan.dashboard');
 });
