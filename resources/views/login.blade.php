@@ -50,10 +50,6 @@
             class="w-full py-3 bg-sky-900 text-white rounded font-bold border border-sky-700 shadow-md shadow-sky-700 transform transition duration-300  hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-indigo-500">
             Login
         </button>
-        <div class="flex justify-between mt-4 text-sm opacity-60">
-            <a href="#" class="underline text-blue-400 hover:text-white">Forgot Password?</a>
-            <a href="#" class="underline text-blue-400 hover:text-white">Register</a>
-        </div>
     </form>
 
     <div class="absolute bottom-8 left-4 flex space-x-2">
