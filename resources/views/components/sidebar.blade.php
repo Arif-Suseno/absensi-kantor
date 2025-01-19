@@ -25,7 +25,7 @@
                 <x-navlink href="/dashboard" :active="request()->is('dashboard')">
                     <i class="fas fa-th-large px-2"></i>Dashboard
                 </x-navlink>
-                <x-navlink href="/absensi" :active="request()->is('absensi')">
+                <x-navlink href="/" :active="request()->is('/')">
                     <i class="fas fa-calendar-check px-2"></i>Absensi
                 </x-navlink>
                 <x-navlink href="/riwayat" :active="request()->is('riwayat')">

@@ -56,7 +56,7 @@
                     <tbody>
                         @foreach ($pengajuanPending as $pengajuan)
                             <tr class="text-center bg-gray-50 hover:bg-gray-100 transition">
-                                <td class="border p-2">{{ $pengajuan->created_at->format('d-m-Y') }}</td>
+                                <td class="border p-2">{{ $pengajuan->created_at->format('Y-m-d') }}</td>
                                 <td class="border p-2">{{ $pengajuan->jenis }}</td>
                                 <td class="border p-2">{{ $pengajuan->tanggal_mulai }}</td>
                                 <td class="border p-2">{{ $pengajuan->tanggal_selesai }}</td>

@@ -37,7 +37,7 @@ Route::middleware(['auth', RoleMiddleware::class. ':Admin'])->group(function(){
 });
 Route::middleware(['auth', RoleMiddleware::class. ':Karyawan'])->group(function(){
     // Absensi
-    Route::get('/absensi', [AbsensiController::class, 'index'])->name('karyawan.absensi');
+    Route::get('/', [AbsensiController::class, 'index'])->name('karyawan.absensi');
     Route::post('/absensi', [AbsensiController::class, 'store'])->name('karyawan.absensi.submit');
 
     Route::get('/riwayat', [AbsensiController::class, 'riwayat'])->name('karyawan.riwayat');

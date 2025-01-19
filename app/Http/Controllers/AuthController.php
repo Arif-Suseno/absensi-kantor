@@ -32,7 +32,7 @@ class AuthController extends Controller
             if($credencials['role'] === 'Admin'){
                 return redirect()->intended('data_karyawan');
             }elseif ($credencials['role'] === 'Karyawan') {
-                return redirect()->intended('absensi');
+                return redirect()->intended('/');
 
             }
 

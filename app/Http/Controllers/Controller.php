@@ -24,9 +24,12 @@ class Controller
 {
     public function showDashboard()
     {
+          // Ambil tanggal hari ini
+          $tanggalHariIni = Carbon::today();
+        
             // Ambil data statistik
             $totalKaryawan = User::where('role', 'karyawan')->count();
-            $totalHadir = Absensi::where('waktu', 'Masuk')->where('status', 'Hadir')->count();
+            $totalHadir = Absensi::where('tanggal', $tanggalHariIni)->where('waktu', 'Keluar')->where('status', 'Hadir')->count();
             $totalSakit = Absensi::where('waktu', 'Masuk')->where('status', 'Sakit')->count();
             $totalCuti = Absensi::where('waktu', 'Masuk')->where('status', 'Cuti')->count();
             $totalIzin = Absensi::where('waktu', 'Masuk')->where('status', 'Izin')->count();
@@ -34,7 +37,7 @@ class Controller
             $izinPending = IzinCuti::where('status', 'Diajukan')->count();
     
             // Data untuk grafik absensi
-            $absensiByStatus = Absensi::selectRaw('status, count(*) as total')
+            $absensiByStatus = Absensi::where('tanggal', $tanggalHariIni)->selectRaw('status, count(*) as total')
                 ->groupBy('status')
                 ->pluck('total', 'status')
                 ->toArray();
